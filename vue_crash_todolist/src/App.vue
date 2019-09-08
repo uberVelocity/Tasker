@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <!-- To get the todo list in the template you use the v-bind directive -->
-    <h1>Todos</h1>
+    <Todos v-bind:todos="todos"/>
+    <!--                   ^ this pertains to the todos list found in 'data()'. they get passed in as props -->
   </div>
 </template>
 
