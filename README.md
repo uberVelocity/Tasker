@@ -6,6 +6,8 @@
 
 - Node.js: Asynchronous single-threaded server used for dynamic websites
 - Express.js: Minimal, unopinionated Node library
+- AXIOS
+- AJAX
 
 #### Developer dependencies 
 
