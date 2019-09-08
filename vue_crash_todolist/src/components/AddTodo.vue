@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import uuid from 'uuid';
 export default {
     name: "AddTodo",
     data() {
@@ -20,12 +19,12 @@ export default {
         addTodo(e) {
             e.preventDefault();  // Prevent writing to a file
             const newTodo = {
-                id: uuid.v4(),
                 title: this.title,
                 completed: false
             }
             // Send up to parent
             this.$emit('add-todo', newTodo);
+            this.title = '';
         }
     }
 }
