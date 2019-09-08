@@ -1,22 +1,33 @@
 <template>
-    <div>
-        <p>Todo Item</p>
+    <div class="todo-item" v-bind:class="{'is-complete':todo.completed}">
+        <p>
+            <input type="checkbox" v-on:change="markComplete">
+            {{todo.title}}
+            <button @click="$emit('del-todo', todo.id)" class="del">x</button> 
+            <!-- You can go to the todos found in App by 'emitting an event' to Todos and then from Todos to App -->
+            </p>
     </div>
 </template>
 
 <script>
 export default {
-    name: "TodoItem"
+    name: "TodoItem",
+    props: ["todo"],
+    methods: {
+        markComplete() {
+            this.todo.completed = !this.todo.completed;
+        }
+    }
 }
 </script>
 
 <style scoped>
-    .todoItem {
-        background: #ffffff;
+    .todo-item {
+        background: #f4f4f4;
         padding: 10px;
         border-bottom: 1px #ccc dotted;
     }
-    .isCompleted {
+    .is-complete {
         text-decoration: line-through;
     }
     .del {
