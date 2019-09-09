@@ -8,6 +8,7 @@
 - Express.js: Minimal, unopinionated Node library
 - AXIOS
 - AJAX
+- WebSockets: standardized protocol (W3C/IETF). Very good for handling lots of bytes per second. A live chat application makes use of web sockets since you need a duplex connection between server and users. **socket.io**
 
 #### Developer dependencies 
 
@@ -28,7 +29,7 @@
 ### Data management systems
 
 - CassandraDB
-- MongoDB: Fast, easily deployable and maintainable on Azure / AWS / MLab (DBaaS)
+- MongoDB: Fast, easily deployable and maintainable on Azure / AWS / MLab (DBaaS). MongoDB Atlas to login (Mlab redirects there).
 
 ### Virtualization software
 
@@ -40,4 +41,3 @@
 ### Hosting (Anything but Heroku since it's too easy?)
 
 ### Monitoring
-
