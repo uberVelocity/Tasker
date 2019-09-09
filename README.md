@@ -34,3 +34,10 @@
 
 - Docker for image deployment and containerization of services of app
 - Kubernetes for production-grade orchestrator between containers
+
+### CI - continuous integration
+
+### Hosting (Anything but Heroku since it's too easy?)
+
+### Monitoring
+
