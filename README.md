@@ -34,6 +34,7 @@
 ### Virtualization software
 
 - Docker for image deployment and containerization of services of app
+https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
 - Kubernetes for production-grade orchestrator between containers
 
 ### CI - continuous integration
