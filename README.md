@@ -34,10 +34,15 @@
 ### Virtualization software
 
 - Docker for image deployment and containerization of services of app
+https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
 - Kubernetes for production-grade orchestrator between containers
 
 ### CI - continuous integration
 
 - Circle Ci
 
+<<<<<<< HEAD
 ### Hosting (Anything but Heroku since it's too easy?)
+=======
+### Monitoring
+>>>>>>> 2be9b381ae2e5f84b4f5775eb71b5ddca7f8160b
