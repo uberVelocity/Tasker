@@ -7,6 +7,12 @@
     "start": "node server/index.js",
     "dev": "nodemon server/index.js"
   },
+  "dependencies": {
+    "express" : "*",
+    "body-parser" : "*",
+    "cors" : "*",
+    "mongodb" : "*"
+  },
   "author": "Mihai Popescu",
   "license": "MIT",
   "devDependencies": {
