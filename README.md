@@ -38,6 +38,6 @@
 
 ### CI - continuous integration
 
-### Hosting (Anything but Heroku since it's too easy?)
+- Circle Ci
 
-### Monitoring
+### Hosting (Anything but Heroku since it's too easy?)
