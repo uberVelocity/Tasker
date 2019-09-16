@@ -6,3 +6,4 @@
 - Run multiple instances of the same front-end and back-end and have a load balancer assign the load. 
 - The data can be fabricated.
 - The functionality is not that important (how the tasks get consumed / computed which server to use).
+- CSS framework: Materialize
