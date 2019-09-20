@@ -1,5 +1,10 @@
 <template>
   <div class="container">
+    <div class="nav">
+      <nav>
+        <button @click="goHome">About</button>
+      </nav>
+    </div>
     <h1>Latest Posts</h1>
     <!-- CREATE POST HERE -->
     <div class="create-post">
@@ -25,7 +30,7 @@
 </template>
 
 <script>
-import PostService from '../PostService';
+import PostService from '../services/PostService';
 
 export default {
   name: 'PostComponent',
@@ -55,6 +60,9 @@ export default {
     async deletePost(id) {
       await PostService.deletePost(id);
       this.posts = await PostService.getPosts();
+    },
+    goHome() {
+      this.$router.push('/about');
     }
   }
   

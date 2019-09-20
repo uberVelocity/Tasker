@@ -7,7 +7,7 @@
 6 silly lifecycle tasker@1.0.0~predev: no script for predev, continuing
 7 info lifecycle tasker@1.0.0~dev: tasker@1.0.0
 8 verbose lifecycle tasker@1.0.0~dev: unsafe-perm in lifecycle true
-9 verbose lifecycle tasker@1.0.0~dev: PATH: /usr/share/npm/bin/node-gyp-bin:/home/merkel/Documents/University/wacc/full-stack/tasker/node_modules/.bin:/home/merkel/Documents/Programs/tidal-desktop-master/build/tidal-linux-x64:/home/merkel/bin:/home/merkel/.local/bin:/home/merkel/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/merkel/.dotnet/tools
+9 verbose lifecycle tasker@1.0.0~dev: PATH: /usr/share/npm/bin/node-gyp-bin:/home/merkel/Documents/University/wacc/full-stack/tasker/node_modules/.bin:/home/merkel/Documents/Programs/tidal-desktop-master/build/tidal-linux-x64:/home/merkel/bin:/home/merkel/Documents/Programs/tidal-desktop-master/build/tidal-linux-x64:/home/merkel/bin:/home/merkel/.local/bin:/home/merkel/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/merkel/.dotnet/tools
 10 verbose lifecycle tasker@1.0.0~dev: CWD: /home/merkel/Documents/University/wacc/full-stack/tasker
 11 silly lifecycle tasker@1.0.0~dev: Args: [ '-c', 'nodemon server/index.js' ]
 12 silly lifecycle tasker@1.0.0~dev: Returned: code: 1  signal: null
