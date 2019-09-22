@@ -1,7 +1,7 @@
 const express = require("express");
 const mongodb = require("mongodb");
-
 const router = express.Router();
+
 
 // Get Posts (/ refers to /api/posts)
 router.get('/', async (req, res) => {
@@ -30,7 +30,7 @@ router.delete('/:id', async (req, res) => {
 // Connect to posts collection
 async function loadPostsCollection() {
     const client = await mongodb.MongoClient.connect(
-    "mongodb+srv://dbadmin:Mihaitu3@universitycluster-b239a.mongodb.net/test?retryWrites=true&w=majority", {
+    process.env.DB_CONNECT, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

@@ -8,10 +8,13 @@
     "dev": "nodemon server/index.js"
   },
   "dependencies": {
-    "express" : "*",
-    "body-parser" : "*",
-    "cors" : "*",
-    "mongodb" : "*"
+    "@hapi/joi": "^16.1.4",
+    "body-parser": "*",
+    "cors": "*",
+    "dotenv": "^8.1.0",
+    "express": "*",
+    "mongodb": "*",
+    "mongoose": "^5.7.1"
   },
   "author": "Mihai Popescu",
   "license": "MIT",
