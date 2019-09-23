@@ -9,3 +9,4 @@
 - CSS framework: Materialize
 - Serve the UI using another server. So, build for production, put the public files on a webserver and feed that to the front end.
 - [Dockerize nginx static web server](https://jonathanmh.com/deploying-a-vue-js-single-page-app-including-router-with-docker/)
+- [Dockerize official web-page](https://vuejs.org/v2/cookbook/dockerize-vuejs-app.html)
