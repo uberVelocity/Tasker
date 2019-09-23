@@ -7,3 +7,4 @@
 - The data can be fabricated.
 - The functionality is not that important (how the tasks get consumed / computed which server to use).
 - CSS framework: Materialize
+- Serve the UI using another server. So, build for production, put the public files on a webserver and feed that to the front end.

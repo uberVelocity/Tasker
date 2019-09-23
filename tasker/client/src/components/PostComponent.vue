@@ -1,16 +1,17 @@
 <template>
   <div class="container">
     <div class="nav">
-      <nav>
-        <button @click="goHome">About</button>
-      </nav>
+        <button class="waves-effect waves-default btn" @click="goHome">Home</button>
+        <button class="waves-effect waves-light btn" @click="goAbout">About</button>
+        <button class="waves-effect waves-light btn" @click="goLogin">Login</button>
+        <button class="waves-effect waves-light btn" @click="goRegister">Register</button>
     </div>
     <h1>Latest Posts</h1>
     <!-- CREATE POST HERE -->
     <div class="create-post">
       <label for="create-post">Say Something...</label>
-      <input type="text" id="create-post" v-model="text" placeholder="Create a post">
-      <button v-on:click="createPost">Post!</button>
+      <input type="text" id="create-post" v-model="text" text-darken-2 placeholder="Create a post">
+      <button class="waves-effect waves-light btn" v-on:click="createPost">Post!</button>
     </div>
     <hr>
     <p class="error" v-if="error">{{ error }}</p>
@@ -23,7 +24,7 @@
       v-on:dblclick="deletePost(post._id)"
       >
       {{ `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getYear()}` }}
-      <p class="text">{{post.text}}</p>
+      <p class="text white-text">{{post.text}}</p>
       </div>
     </div>
   </div>
@@ -62,7 +63,16 @@ export default {
       this.posts = await PostService.getPosts();
     },
     goHome() {
+      this.$router.push('/');
+    },
+    goAbout() {
       this.$router.push('/about');
+    },
+    goLogin() {
+      this.$router.push('/login');
+    },
+    goRegister() {
+      this.$router.push('/register');
     }
   }
   
@@ -85,8 +95,8 @@ p.error {
 
 div.post {
   position: relative;
-  border: 1px solid #5bd658;
-  background-color: #bcffb8;
+  border: 1px solid #6C63FF;
+  background-color: #6C63FF;
   padding: 10px 10px 30px 10px;
   margin-bottom: 15px;
 }
@@ -101,9 +111,17 @@ div.created-at{
   font-size: 13px;
 }
 
+button {
+  background-color: #6C63FF
+}
+.btn:hover {
+  background-color: lightgrey;
+}
+
 p.text {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 0;
 }
+
 </style>

@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
+
 import PostComponent from './components/PostComponent'
 import AboutComponent from './components/AboutComponent'
 import LoginComponent from './components/LoginComponent'
 import RegisterComponent from './components/RegisterComponent'
+import HomeComponent from './components/HomeComponent';
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
@@ -12,8 +14,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/', 
-    name: 'Post',
-    component: PostComponent
+    name: 'Home',
+    component: HomeComponent
   },
   {
     path: '/about',
@@ -29,6 +31,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: RegisterComponent
+  },
+  {
+    path: '/posts',
+    name: 'Post',
+    component: PostComponent
   }
 ];
 
