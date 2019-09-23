@@ -9,12 +9,12 @@ const app = express();
 dotenv.config();
 
 // Connect to DB
-mongoose.connect(process.env.DB_CONNECT, {
+mongoose.connect(process.env.DB_LOCALDOCKER_CONNECT, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, () => {
     console.log('Connected to db...');
-})
+});
 
 // Middle ware
 app.use(bodyParser.json());
@@ -22,10 +22,10 @@ app.use(cors());
 app.use(express.json());
 
 // Import routes
-const posts = require('./routes/api/posts');
+const servers = require('./routes/api/servers');
 const auth = require('./routes/api/auth');
 
-app.use('/api/posts', posts);
+app.use('/api/servers', servers);
 app.use('/api/user', auth);
 
 // Handle production

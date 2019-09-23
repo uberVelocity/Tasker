@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
 
-import PostComponent from './components/PostComponent'
+import ServerComponent from './components/ServerComponent'
 import AboutComponent from './components/AboutComponent'
 import LoginComponent from './components/LoginComponent'
 import RegisterComponent from './components/RegisterComponent'
@@ -33,9 +33,9 @@ const routes = [
     component: RegisterComponent
   },
   {
-    path: '/posts',
-    name: 'Post',
-    component: PostComponent
+    path: '/servers',
+    name: 'Server',
+    component: ServerComponent
   }
 ];
 
