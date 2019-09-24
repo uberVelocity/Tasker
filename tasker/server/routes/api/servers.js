@@ -29,8 +29,7 @@ router.delete('/:id', async (req, res) => {
 
 // Connect to posts collection
 async function loadServersCollection() {
-    const client = await mongodb.MongoClient.connect(
-    process.env.DB_LOCALDOCKER_CONNECT, {
+    const client = await mongodb.MongoClient.connect('mongodb://localhost:27017-27019/admin', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

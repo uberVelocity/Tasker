@@ -9,7 +9,7 @@ const app = express();
 dotenv.config();
 
 // Connect to DB
-mongoose.connect(process.env.DB_LOCALDOCKER_CONNECT, {
+mongoose.connect('mongodb://localhost:27017-27019/admin', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, () => {
