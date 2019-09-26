@@ -11,3 +11,5 @@
 - [Dockerize nginx static web server](https://jonathanmh.com/deploying-a-vue-js-single-page-app-including-router-with-docker/)
 - [Dockerize official web-page](https://vuejs.org/v2/cookbook/dockerize-vuejs-app.html)
 - [Connecting to dockerized db](https://stackoverflow.com/questions/33336773/connecting-to-mongo-docker-container-from-host)
+- We have dockerized DB, Backend, and **frontend**. DB and backend are fine, however the front end is unable to change pages. This has to do with setting up SPA-style routing using nginx. Need to look into this.
+- Communication between docker containers needs to be established. Kubernetes to the rescue!
