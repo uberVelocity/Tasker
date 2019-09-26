@@ -1,32 +1,36 @@
 const express = require('express');
 const mongodb = require('mongodb');
 const User = require('../../model/User');
-const joi = require('@hapi/joi');
+const Joi = require('@hapi/joi');
 
 const router = express.Router();
 
-const schema = {
-  name: joi.string()
+const schema = Joi.object({
+  name: Joi.string()
     .min(6)
     .required(),
-  email: joi.string()
+  email: Joi.string()
     .min(6)
     .required()
     .email(),
-  password: joi.string()
+  password: Joi.string()
     .min(6)
     .required()
-};
+});
 
 // Get auth
 
 // Post auth
 router.post('/register', async (req, res) => {
+
     // Validate data before making user
     try {
-      const result = await joi.valid(req.body, schema);
-    } catch(error) {
-      res.send(error.details[0].message);
+      const { error } = schema.validate(req.body);
+      if (error) {
+        res.status(400).send(error.details[0].message);
+      }
+    } catch(err) {
+      res.send(err);
     }
     
     const user = new User({
