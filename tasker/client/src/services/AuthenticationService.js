@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const url = 'api/auth/';
+const url = 'api/user/';
 
 class AuthenticationService {
     static register(credentials) {
