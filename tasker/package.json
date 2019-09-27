@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "@hapi/joi": "^16.1.4",
+    "bcryptjs": "^2.4.3",
     "body-parser": "*",
     "cors": "*",
     "dotenv": "^8.1.0",
     "express": "*",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "*",
     "mongoose": "^5.7.1"
   },
