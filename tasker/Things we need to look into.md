@@ -13,3 +13,26 @@
 - [Connecting to dockerized db](https://stackoverflow.com/questions/33336773/connecting-to-mongo-docker-container-from-host)
 - We have dockerized DB, Backend, and **frontend**. DB and backend are fine, however the front end is unable to change pages. This has to do with setting up SPA-style routing using nginx. Need to look into this.
 - Communication between docker containers needs to be established. Kubernetes to the rescue!
+
+
+Querries to be run for cassandra:
+
+CREATE KEYSPACE tasks 
+    WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 3};
+
+CREATE TABLE tasks(
+    id int PRIMARY KEY,
+    name text,
+    runtime int,
+    start timestamp,
+    deadline timestamp
+    );
+   
+INSERT INTO tasks (id, name, runtime, start, deadline) 
+    VALUES(1,'test', 1000, 1569542400655, 1569715200655);
+ 
+ Resources for cassandra:
+ https://docs.datastax.com/en/developer/nodejs-driver/4.2/
+ https://github.com/docker-library/docs/tree/master/cassandra/
+ https://www.tutorialspoint.com/cassandra/cassandra_cql_datatypes.htm
+ https://www.tutorialspoint.com/cassandra/index.htm
