@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: node-echo-ingress
+  name: tasker-ingress
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
@@ -13,7 +13,7 @@ spec:
       - path: /
         backend:
           # matches with Service metadata.name
-          serviceName: node-echo-service
+          serviceName: front-end-service
           servicePort: 80
       - path: /
         backend:
