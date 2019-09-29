@@ -160,7 +160,7 @@ div.created-at{
 }
 
 button {
-  background-color: #6C63FF
+  background-color: #6C63FF;
 }
 .btn:hover {
   background-color: lightgrey;
@@ -176,11 +176,14 @@ select {
   display: flex;
 }
 
-.hiddenEnergy {
-  display: none;
+input {
+  color: #6C63FF !important;
+  border-bottom: 1px solid #6C63FF !important;
+  -webkit-box-shadow: 0 1px 0 0 #6C63FF !important;
+  box-shadow: 0 1px 0 0 #6C63FF !important;
 }
 
-.normalEnergy {
-  display: none;
+.btn:focus {
+  background-color: #6C63FF;
 }
 </style>
