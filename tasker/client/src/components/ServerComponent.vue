@@ -12,13 +12,26 @@
       <label class="col s12" for="create-server">Insert a server:</label>
       <input type="text" id="create-server" v-model="text" text-darken-2 placeholder="Server name">
        <div class="input-field col s12">
-        <select name="energy-type" id="energy-field" class="form-control" v-model="selected" @change="onChange">
-          <option value="1">Coal</option>
-          <option value="2">Solar</option>
-          <option value="3">Wind</option>
-          <option value="4">Uranium</option>
+        <select name="energy-type" id="energy-field" class="form-control" v-model="selectedEnergy" @change="onChangeEnergy()">
+          <option value="coal">Coal</option>
+          <option value="solar">Solar</option>
+          <option value="wind">Wind</option>
+          <option value="uranium">Uranium</option>
         </select>
         <label id="energyLabel" class="grey-text text-lighten-2">Energy type</label>
+      </div>
+      <div class="input-field col s12">
+        <select name="location" id="location-field" class="form-control" v-model="selectedLocation" @change="onChangeLocation()">
+          <option value="europe">Europe</option>
+          <option value="asia">Asia</option>
+          <option value="northAmerica">North America</option>
+          <option value="southAmerica">South America</option>
+          <option value="toto">Toto</option>
+        </select>
+        <label id="locationLabel" class="grey-text text-lighten-2">Location</label>
+        </div>
+        <div class="input-field col s12">
+          <label>Price/GW: {{ ppgw }}€</label>
         </div>
       <br>
       <button class="waves-effect waves-light btn" v-on:click="createServer">Add</button>
@@ -50,7 +63,9 @@ export default {
       servers: [],
       error: '',
       text: '',
-      selected: '0'
+      selectedEnergy: '',
+      selectedLocation: '',
+      ppgw: '0 '
     }
   },
   async created() {
@@ -82,9 +97,31 @@ export default {
     goRegister() {
       this.$router.push('/register');
     },
-    onChange() {
-      document.getElementById('energyLabel').style.display = 'none';    
-
+    onChangeEnergy() {
+      document.getElementById('energyLabel').style.display = 'none';
+      this.computePPGW();
+    },
+    onChangeLocation() {
+      document.getElementById('locationLabel').style.display = 'none';
+    },
+    computePPGW() {
+      switch(this.selectedEnergy) {
+        case 'solar':
+          this.ppgw = 0.013;
+          break;
+        case 'wind':
+          this.ppgw = 0.009;
+          break;
+        case 'coal':
+          this.ppgw = 0.031;
+          break;
+        case 'uranium':
+          this.ppgw = 0.131;
+          break;
+        default:
+          this.ppgw = 69;
+          break;
+      }
     }
   }
 }
