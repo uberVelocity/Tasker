@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: node-echo-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: minikube.info
+    http:
+      paths:
+      - path: /
+        backend:
+          # matches with Service metadata.name
+          serviceName: node-echo-service
+          servicePort: 80
+      - path: /api
+        backend:
+          # matches with Service metadata.name
+          serviceName: back-end-service
+          servicePort: 5000
