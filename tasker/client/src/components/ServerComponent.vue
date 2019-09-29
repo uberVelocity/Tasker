@@ -9,8 +9,18 @@
     <h1>All servers</h1>
     <!-- CREATE SERVER HERE -->
     <div class="create-server">
-      <label for="create-server">Say Something...</label>
-      <input type="text" id="create-server" v-model="text" text-darken-2 placeholder="Add a server">
+      <label class="col s12" for="create-server">Insert a server:</label>
+      <input type="text" id="create-server" v-model="text" text-darken-2 placeholder="Server name">
+       <div class="input-field col s12">
+        <select name="energy-type" id="energy-field" class="form-control" v-model="selected" @change="onChange">
+          <option value="1">Coal</option>
+          <option value="2">Solar</option>
+          <option value="3">Wind</option>
+          <option value="4">Uranium</option>
+        </select>
+        <label id="energyLabel" class="grey-text text-lighten-2">Energy type</label>
+        </div>
+      <br>
       <button class="waves-effect waves-light btn" v-on:click="createServer">Add</button>
     </div>
     <hr>
@@ -39,7 +49,8 @@ export default {
     return {
       servers: [],
       error: '',
-      text: ''
+      text: '',
+      selected: '0'
     }
   },
   async created() {
@@ -53,6 +64,7 @@ export default {
     async createServer() {
       await ServerService.insertServer(this.text);
       this.servers = await ServerService.getServers();
+      this.text = '';
     },
     async deleteServer(id) {
       await ServerService.deleteServer(id);
@@ -69,9 +81,12 @@ export default {
     },
     goRegister() {
       this.$router.push('/register');
+    },
+    onChange() {
+      document.getElementById('energyLabel').style.display = 'none';    
+
     }
   }
-  
 }
 </script>
 
@@ -120,4 +135,15 @@ p.text {
   margin-bottom: 0;
 }
 
+select {
+  display: flex;
+}
+
+.hiddenEnergy {
+  display: none;
+}
+
+.normalEnergy {
+  display: none;
+}
 </style>
