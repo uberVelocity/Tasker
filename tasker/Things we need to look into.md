@@ -17,3 +17,4 @@
 - Generate power consumption of servers
 - Store power consumption of servers on Cassandra
 - Web-sockets to feed in the power-consumptions of servers
+- [Creating and storing cookies](https://sabe.io/classes/javascript/cookies)
