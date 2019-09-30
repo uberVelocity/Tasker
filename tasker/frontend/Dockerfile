@@ -1,7 +1,7 @@
 FROM node:lts-alpine as build-stage
 
 # Make 'client' the current working directory
-WORKDIR client
+WORKDIR frontend
 
 # copy both 'package.json' and 'package-lock.json' (if available)
 COPY package*.json ./
@@ -17,7 +17,7 @@ RUN npm run build
 
 # production stage
 FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage client/dist /usr/share/nginx/html
+COPY --from=build-stage frontend/dist /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
