@@ -9,8 +9,7 @@ const app = express();
 dotenv.config();
 
 // Connect to DB
-mongoose.connect('mongodb://localhost:27017/tasker', {
-    useNewUrlParser: true,
+mongoose.connect('mongodb://localhost:27019/tasker', {    useNewUrlParser: true,
     useUnifiedTopology: true
 }, () => {
     console.log('Connected to db...');
