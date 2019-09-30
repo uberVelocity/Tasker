@@ -83,7 +83,6 @@ typings/
 
 # gatsby files
 .cache/
-public
 
 # vuepress build output
 .vuepress/dist
@@ -102,7 +101,6 @@ Thumbs.db
 db.json
 *.log
 node_modules/
-public/
 .deploy*/
 src/_drafts
 package-lock.json
