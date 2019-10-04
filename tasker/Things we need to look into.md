@@ -18,3 +18,5 @@
 - Store power consumption of servers on Cassandra
 - Web-sockets to feed in the power-consumptions of servers
 - [Creating and storing cookies](https://sabe.io/classes/javascript/cookies)
+- Running a cluster of instances of CassandraDB Databases (Instructions found on Docker Hub Image)
+- Running replication for mongo
