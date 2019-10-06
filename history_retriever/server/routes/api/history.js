@@ -21,19 +21,8 @@ const getAllPowerConsumption = 'SELECT value, ts FROM gwconsumptioncompaction WH
 
 // Get history of GW
 router.get('/gw', async (req, res) => {
-    let gwHistory = {
-        servers: []
-    }
-    compileServerListWithHistory();
-    
-    // for (i = 0; i < gwHistory.servers.length; i++) {
-    //     console.log(gwHistory.servers[i].server);
-    //     console.log('length: ' + gwHistory.servers[i].valuesGw.length);
-    //     for (j = 0; j < gwHistory.servers[i].valuesGw.length; j++) {
-    //         console.log(gwHistory.servers[i].valuesGw[j]);
-    //         console.log(gwHistory.servers[i].valuesTs[j]);
-    //     }
-    // }
+    let gwHistory = await compileServerListWithHistory();
+    res.status(200).send(gwHistory);
 });
 
 async function compileServerListWithHistory() {
@@ -55,9 +44,6 @@ async function compileServerListWithHistory() {
                     newServer.valuesGw.push(err.rows[i].value);
                     newServer.valuesTs.push(err.rows[i].ts);
                 }
-                // console.log(newServer.server);
-                // console.log(newServer.valuesGw);
-                // console.log(newServer.valuesTs);
                 compiledList.push(newServer);
                 nthServer += 1;
                 console.log(compiledList[0]);
@@ -73,7 +59,7 @@ async function compileServerListWithHistory() {
             }
         );
     }
-    
+    return compiledList;
 }
 
 async function getServersListFromMongo() {
