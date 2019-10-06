@@ -22,22 +22,24 @@ dotenv.config();
 
 const port = process.env.PORT || 3001;
 
+const insertCo2Consumption = 'INSERT INTO co2consumptioncompaction(server, ts, value) VALUES(?, ?, ?)';
 // Inserts at every second the value of each server into the database
 async function generateCo2() {
-    const getQuery = 'SELECT * FROM co2consumption';
-    cassandraClient.execute(getQuery, (err, result) => {
-        const firstly = result.first();
-        console.log(`The id of the get is ${firstly.id}. The value: ${firstly.value}.`);
-    });
+    
     const servers = await getServersListFromMongo();
     // For each server in the server list, generate a CO2 emission value and insert it
     // in the database.
     servers.forEach(server => {
         // Use server ID to INSERT value of CO2 and timestamp to corresponding servers
-        const serverId = server._id;
-        const co2Value = Math.random();
+        const serverId = server._id.toString();
         console.log(serverId);
-
+        const co2Value = Math.random();
+        params = [serverId, new Date(), co2Value];
+        cassandraClient.execute(insertCo2Consumption, params, {prepare: true}, (err) => {
+            if(err) {
+                console.log(err);
+            }
+        });
     });
 }
 
