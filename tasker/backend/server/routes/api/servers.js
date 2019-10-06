@@ -3,7 +3,7 @@ const mongodb = require('mongodb');
 const router = express.Router();
 
 
-// Get Posts (/ refers to /api/servers)
+// Get Servers (/ refers to /api/servers)
 router.get('/', async (req, res) => {
     const servers = await loadServersCollection();
     res.send(await servers.find({}).toArray());
@@ -17,7 +17,7 @@ router.post('/pizza', async (req, res) => {
     }).send();
 });
 
-// Add Posts
+// Add Servers
 router.post('/', async (req, res) => {
     const servers = await loadServersCollection();
     await servers.insertOne({
@@ -28,14 +28,14 @@ router.post('/', async (req, res) => {
     return res.status(201).send();
 });
 
-// Delete Posts
+// Delete Servers
 router.delete('/:id', async (req, res) => {
     const servers = await loadServersCollection();
     await servers.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
     res.status(200).send();
 });
 
-// Connect to posts collection
+// Connect to servers collection
 async function loadServersCollection() {
     const client = await mongodb.MongoClient.connect('mongodb://db-service.default.svc.cluster.minikube.info:27019/tasker', {
         useNewUrlParser: true,

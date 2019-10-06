@@ -1,0 +1,22 @@
+{
+  "name": "history_retriever",
+  "version": "1.0.0",
+  "description": "Retrieves history of co2 and gw values from cassandra and sends them through websocket for visualization.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "author": "Mihai Popescu",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  },
+  "dependencies": {
+    "assert": "^2.0.0",
+    "cassandra-driver": "^4.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.2"
+  }
+}
