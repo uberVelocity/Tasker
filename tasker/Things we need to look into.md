@@ -13,3 +13,10 @@
 - [Connecting to dockerized db](https://stackoverflow.com/questions/33336773/connecting-to-mongo-docker-container-from-host)
 - We have dockerized DB, Backend, and **frontend**. DB and backend are fine, however the front end is unable to change pages. This has to do with setting up SPA-style routing using nginx. Need to look into this.
 - Communication between docker containers needs to be established. Kubernetes to the rescue!
+- 
+- Generate power consumption of servers
+- Store power consumption of servers on Cassandra
+- Web-sockets to feed in the power-consumptions of servers
+- [Creating and storing cookies](https://sabe.io/classes/javascript/cookies)
+- Running a cluster of instances of CassandraDB Databases (Instructions found on Docker Hub Image)
+- Running replication for mongo

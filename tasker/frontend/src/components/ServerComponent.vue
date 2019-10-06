@@ -105,6 +105,7 @@ export default {
       document.getElementById('locationLabel').style.display = 'none';
     },
     computePPGW() {
+      // Hardcoded energy values, maybe should be replaced by actual data.
       switch(this.selectedEnergy) {
         case 'solar':
           this.ppgw = 0.013;

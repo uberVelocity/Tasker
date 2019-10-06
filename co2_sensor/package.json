@@ -1,0 +1,21 @@
+{
+  "name": "co2_sensor",
+  "version": "1.0.0",
+  "description": "Carbon dioxide emissions sensor. The webserver simulates live sensors for carbon dioxide emissions tracking of the app's servers.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "author": "Mihai Popescu",
+  "license": "MIT",
+  "dependencies": {
+    "cassandra-driver": "^4.2.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
