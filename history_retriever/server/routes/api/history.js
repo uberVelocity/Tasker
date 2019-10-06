@@ -1,7 +1,6 @@
 const express = require('express');
 const mongodb = require('mongodb');
 const router = express.Router();
-const assert = require('assert');
 
 const localDatacenter = 'datacenter1';
 const cassandra = require('cassandra-driver');
@@ -51,7 +50,6 @@ async function compileServerListWithHistory() {
             })
         }).then(
             response => {
-                console.log('!!!!!@@@@@length of compiledList after shit: ' + compiledList.length);
 
             },
             reason => {
