@@ -8,5 +8,8 @@ spec:
     # matches with Deployment spec.selector.matchLabels
     app: db
   ports:
-    - port: 27019
+    - name: db-service
+      protocol: "TCP"
+      port: 27019
       targetPort: 27019
+  type: NodePort

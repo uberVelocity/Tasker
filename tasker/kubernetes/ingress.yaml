@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: minikube.info
+  - host: api.minikube.info
     http:
       paths:
       - path: /
@@ -15,8 +15,3 @@ spec:
           # matches with Service metadata.name
           serviceName: front-end-service
           servicePort: 80
-      - path: /
-        backend:
-          # matches with Service metadata.name
-          serviceName: back-end-service
-          servicePort: 5000
