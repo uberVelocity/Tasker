@@ -5,7 +5,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://back-end-service.default.svc.cluster.minikube.info:5000'
+                target: 'http://minikube.info/api'
             }
         }
     }

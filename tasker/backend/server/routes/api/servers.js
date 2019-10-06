@@ -37,7 +37,7 @@ router.delete('/:id', async (req, res) => {
 
 // Connect to servers collection
 async function loadServersCollection() {
-    const client = await mongodb.MongoClient.connect('mongodb://db-service.default.svc.cluster.minikube.info:27019/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://db-service:27019/tasker', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }
