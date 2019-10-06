@@ -9,6 +9,14 @@ router.get('/', async (req, res) => {
     res.send(await servers.find({}).toArray());
 });
 
+// Debug
+router.post('/pizza', async (req, res) => {
+    console.log('some text received');
+    await res.status(200).json({
+        text: 'newTitle'
+    }).send();
+});
+
 // Add Posts
 router.post('/', async (req, res) => {
     const servers = await loadServersCollection();
@@ -29,7 +37,7 @@ router.delete('/:id', async (req, res) => {
 
 // Connect to posts collection
 async function loadServersCollection() {
-    const client = await mongodb.MongoClient.connect('mongodb://localhost:27017/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://db-service.default.svc.cluster.minikube.info:27019/tasker', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

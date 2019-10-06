@@ -1,7 +1,0 @@
-#!/bin/bash
-
-sudo docker login
-sudo docker build -t front-end ../frontend
-sudo docker push s3249212/front-end
-sudo docker build -t back-end ../backend
-sudo docker push s3249212/back-end

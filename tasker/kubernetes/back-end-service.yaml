@@ -8,5 +8,7 @@ spec:
     # matches with Deployment spec.selector.matchLabels
     app: back-end
   ports:
-    - port: 5000
+    - protocol: "TCP"
+      port: 5000
       targetPort: 5000
+  type: NodePort

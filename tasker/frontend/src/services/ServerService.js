@@ -21,6 +21,10 @@ class ServerService {
         });
     }
 
+    static getAbout() {
+        return axios.post('api/servers/pizza');
+    }
+
     // Create Posts
     static insertServer(text) {
         return axios.post(url, {
