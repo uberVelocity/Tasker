@@ -23,8 +23,8 @@ server.listen(port, () => console.log(`History retriever operational on port ${p
 io.on('connection', (socket) => {
     console.log(`a user has connected: ${socket.id}`);
 
-    socket.on('HELLO_MESSAGE', () => {
-        console.log('received hello message from the front-end');
+    socket.on('HELLO_MESSAGE', (data) => {
+        console.log('received hello message from the front-end with message: ' + data.message);
     });
 
     io.on('disconnect', () => {
