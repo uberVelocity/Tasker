@@ -5,6 +5,7 @@
         <button class="waves-effect waves-light btn" @click="goAbout">About</button>
         <button class="waves-effect waves-light btn" @click="goLogin">Login</button>
         <button class="waves-effect waves-light btn" @click="goRegister">Register</button>
+        <button class="waves-effect waves-light btn" @click="goStatus">Status</button>
     </div>
     <h1>All servers</h1>
     <!-- CREATE SERVER HERE -->
@@ -34,7 +35,7 @@
           <label>Price/GW: {{ ppgw }}€</label>
         </div>
       <br>
-      <button class="waves-effect waves-light btn" v-on:click="createServer">Add</button>
+      <button class="waves-effect waves-light btn addserver" v-on:click="createServer">Add</button>
     </div>
     <hr>
     <p class="error" v-if="error">{{ error }}</p>
@@ -96,6 +97,9 @@ export default {
     },
     goRegister() {
       this.$router.push('/register');
+    },
+    goStatus() {
+      this.$router.push('/dashboard/status');
     },
     onChangeEnergy() {
       document.getElementById('energyLabel').style.display = 'none';
@@ -162,9 +166,17 @@ div.created-at{
 
 button {
   background-color: #6C63FF;
+  margin: 2px;
+  border-radius: 7px;
 }
+
+.addserver {
+  padding: 0px 100px;
+  border-radius: 20px;
+}
+
 .btn:hover {
-  background-color: lightgrey;
+  background-color: #352fa1;
 }
 
 p.text {

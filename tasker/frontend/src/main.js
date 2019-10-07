@@ -7,6 +7,7 @@ import AboutComponent from './components/AboutComponent'
 import LoginComponent from './components/LoginComponent'
 import RegisterComponent from './components/RegisterComponent'
 import HomeComponent from './components/HomeComponent';
+import StatusComponent from './components/StatusComponent';
 
 Vue.config.productionTip = false;
 
@@ -37,6 +38,11 @@ const routes = [
     path: '/servers',
     name: 'Server',
     component: ServerComponent
+  },
+  {
+    path: '/dashboard/status',
+    name: 'Status',
+    component: StatusComponent
   }
 ];
 

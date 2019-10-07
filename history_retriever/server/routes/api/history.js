@@ -23,7 +23,7 @@ const clientOptionsCo2 = {
      contactPoints: contactPoints,
      authProvider: new cassandra.auth.PlainTextAuthProvider('admin', 'q1w2e3r4'),
      keyspace:'co2'
-}
+};
 
 const getAllPowerConsumption = 'SELECT value, ts FROM gwconsumptioncompaction WHERE server=?';
 const getAllCo2Emissions = 'SELECT value, ts FROM co2consumptioncompaction WHERE server=?';
@@ -41,7 +41,8 @@ router.get('/co2', async (req, res) => {
 });
 
 // Compiles and returns a list of values of a certain property (either CO2 or GW)
-// with timestamps from Cassandra
+// with timestamps from Cassandra FOR ALL SERVERS THAT ARE CURRENTLY IN MONGO (so not ones that have values)
+// but have been removed from the database
 async function compileServerListWithHistory(requestType) {
     if (requestType === 'power') {
         cassandraClient = new cassandra.Client(clientOptionsGw);
