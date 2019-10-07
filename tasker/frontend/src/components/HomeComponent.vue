@@ -22,23 +22,44 @@
         <div class="col s5">
             <h2>Run tasks. Smartly.</h2>
             <h4>Join Tasker to run your tasks today!</h4>
-            <button class="btn waves-effect waves-light blue">Sign up!</button>
+            <form @submit.prevent="getHistory">
+                <button>Get History</button>
+                <button class="btn waves-effect waves-light blue">Sign up!</button>
+            </form>
         </div>
     </div>
     </div>
 </template>
 
 <script>
+import io from 'socket.io-client';
+
 export default {
+    
     name: 'HomeComponent',
+    data() {
+        return {
+            isConnected: 'false',
+            socket: io('localhost:4001')
+        }
+    },
     methods: {
         goAbout() {
             this.$router.push('/about');
         },
         goServers() {
             this.$router.push('/servers');
+        },
+        getHistory(e) {
+            e.preventDefault();
+            
+            this.socket.emit('HELLO_MESSAGE', {
+                message: 'hello'
+            });
+
         }
     }
+    
 }
 </script>
 

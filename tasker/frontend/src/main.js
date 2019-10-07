@@ -7,6 +7,7 @@ import AboutComponent from './components/AboutComponent'
 import LoginComponent from './components/LoginComponent'
 import RegisterComponent from './components/RegisterComponent'
 import HomeComponent from './components/HomeComponent';
+
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter);

@@ -2,14 +2,13 @@ const express = require('express');
 const mongodb = require('mongodb');
 const router = express.Router();
 
-
 // Get Servers (/ refers to /api/servers)
 router.get('/', async (req, res) => {
     const servers = await loadServersCollection();
     res.send(await servers.find({}).toArray());
 });
 
-// Debug
+// Debug route
 router.post('/pizza', async (req, res) => {
     console.log('some text received');
     await res.status(200).json({
@@ -37,7 +36,7 @@ router.delete('/:id', async (req, res) => {
 
 // Connect to servers collection
 async function loadServersCollection() {
-    const client = await mongodb.MongoClient.connect('mongodb://db-service:27019/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://localhost:27017-27019/tasker', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

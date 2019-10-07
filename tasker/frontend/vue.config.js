@@ -5,7 +5,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://minikube.info/api'
+                target: 'http://localhost:5000'
             }
         }
     }

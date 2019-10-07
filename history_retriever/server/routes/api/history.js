@@ -6,7 +6,8 @@ const localDatacenter = 'datacenter1';
 const cassandra = require('cassandra-driver');
 const contactPoints = ['172.17.0.3', '172.17.0.3', '172.17.0.3'];
 const loadBalancingPolicy = new cassandra.policies.loadBalancing.DCAwareRoundRobinPolicy(localDatacenter); 
-const clientOptions = {
+
+const clientOptionsGw = {
    policies : {
       loadBalancing : loadBalancingPolicy
    },
@@ -14,33 +15,62 @@ const clientOptions = {
    authProvider: new cassandra.auth.PlainTextAuthProvider('admin', 'q1w2e3r4'),
    keyspace:'gw'
 };
-const cassandraClient = new cassandra.Client(clientOptions);
+
+const clientOptionsCo2 = {
+    policies : {
+        loadBalancing : loadBalancingPolicy
+     },
+     contactPoints: contactPoints,
+     authProvider: new cassandra.auth.PlainTextAuthProvider('admin', 'q1w2e3r4'),
+     keyspace:'co2'
+}
 
 const getAllPowerConsumption = 'SELECT value, ts FROM gwconsumptioncompaction WHERE server=?';
+const getAllCo2Emissions = 'SELECT value, ts FROM co2consumptioncompaction WHERE server=?';
 
 // Get history of GW
 router.get('/gw', async (req, res) => {
-    let gwHistory = await compileServerListWithHistory();
+    const gwHistory = await compileServerListWithHistory('power');
     res.status(200).send(gwHistory);
 });
 
-async function compileServerListWithHistory() {
+// Get history of CO2 emissions
+router.get('/co2', async (req, res) => {
+    const co2History = await compileServerListWithHistory('co2');
+    res.status(200).send(co2History);
+});
+
+// Compiles and returns a list of values of a certain property (either CO2 or GW)
+// with timestamps from Cassandra
+async function compileServerListWithHistory(requestType) {
+    if (requestType === 'power') {
+        cassandraClient = new cassandra.Client(clientOptionsGw);
+        requestType = getAllPowerConsumption;
+    }
+    else if (requestType === 'co2') {
+        cassandraClient = new cassandra.Client(clientOptionsCo2);
+        requestType = getAllCo2Emissions;
+    }
+    else {
+        return 'err';
+    }
     let nthServer = 0;
     let compiledList = [];
     const servers = await getServersListFromMongo();
     for (mongoServer of servers) {
         params = [mongoServer._id.toString()];
         await new Promise((resolve, reject) => {
-            cassandraClient.execute(getAllPowerConsumption, params, (result, err) => {
-                console.log('printing error: ' + Object.getOwnPropertyNames(err));
-                if(err) reject(err)
+            cassandraClient.execute(requestType, params, (result, err) => {
+                if(err) {
+                    reject(err);
+                }
                 let newServer = {
                     server: mongoServer._id.toString(),
-                    valuesGw: [],
+                    values: [],
                     valuesTs: []
                 }
                 for (i = 0; i < err.rows.length; i ++) {
-                    newServer.valuesGw.push(err.rows[i].value);
+                    newServer.values.push(err.rows[i].value);
                     newServer.valuesTs.push(err.rows[i].ts);
                 }
                 compiledList.push(newServer);
@@ -49,12 +79,8 @@ async function compileServerListWithHistory() {
                 resolve()
             })
         }).then(
-            response => {
-
-            },
-            reason => {
-
-            }
+            response => {},
+            reason => {}
         );
     }
     return compiledList;
