@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
 
     // Check if valid token
     try {
-        const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+        const verified = jwt.verify(token, '124aww12423ad24124awdrtaeNADAIUASNFI');
         req.user = verified;
         next();
     } catch(err) {

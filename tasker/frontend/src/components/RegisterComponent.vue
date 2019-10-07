@@ -1,13 +1,16 @@
 <template>
-    <div>
+    <div class="container">
         <h1>Register</h1>
+        <input name="name" placeholder="name" v-model="name">
         <input type="email" name="email" placeholder="email"
         v-model="email">
         <br>
         <input type="password" name="password" placeholder="password"
         v-model="password">
         <br>
-        <button @click="register">Register</button>
+        <button class="waves-effect waves-default btn" @click="register">Register</button>
+        <br>
+        <label> Response: {{ response }} </label>
     </div>
 </template>
 
@@ -17,16 +20,20 @@ import AuthenticationService from '../services/AuthenticationService';
 export default {
     data() {
         return {
+            name: '',
             email: '',
-            password: ''
+            password: '',
+            response: ''
         }
     },
     methods: {
         async register() {
             const response = await AuthenticationService.register({
+                name: this.name,
                 email: this.email,
                 password: this.password
             });
+            alarm(response);
         }
     }
 }

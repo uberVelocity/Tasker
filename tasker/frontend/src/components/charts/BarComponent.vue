@@ -11,13 +11,13 @@ export default {
         {
           label: "Data One",
           backgroundColor: "#f87797",
-          data: [40, 20]
+          data: [1, 20]
         }
       ]
     },
     options: {
-      responsive: true,
-      maintainAspectRation: false
+      responsive: false,
+      maintainAspectRation: true
     }
   }),
   mounted() {

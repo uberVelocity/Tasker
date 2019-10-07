@@ -1,11 +1,21 @@
-
 import axios from 'axios';
 
 const url = 'api/user/';
 
 class AuthenticationService {
-    static register(credentials) {
-        return axios.post(`${url}register`, credentials);
+    static async register(credentials) {
+        const resResult = await axios.post('api/user/register', {
+            name: credentials.name,
+            email: credentials.email,
+            password: credentials.password
+        });
+    }
+
+    static async login(credentials) {
+        const resResult = await axios.post('api/user/login', {
+            email: credentials.email,
+            password: credentials.password
+        });
     }
 }
 

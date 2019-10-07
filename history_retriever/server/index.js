@@ -1,5 +1,4 @@
 const express = require('express');
-const mongodb = require('mongodb');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 

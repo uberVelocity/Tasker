@@ -1,24 +1,37 @@
 <template>
-    <div>
+    <div class="container">
       <form @submit.prevent="login" class="login">
         <h1>Sign in</h1>
         <label>Username</label>
-        <input required v-model="username" type="text" placeholder="Username">
+        <input required v-model="email" type="text" placeholder="Email">
         <br>
         <label>Password</label>
         <input required v-model="password" type="password" placeholder="Password">
         <hr/>
-        <button type="submit">Login</button>    
+        <button type="waves-effect waves-default btn">Login</button>
       </form> 
+      <label>Response: {{response}} </label>
     </div>
 </template>
 
 <script>
+import AuthenticationService from '../services/AuthenticationService';
+
 export default {
     name: 'Login',
+    data() {
+      return {
+        response: '',
+        email: '',
+        password: ''
+      }
+    },
     methods: {
-        login() {
-            
+        async login() {
+          const res = await AuthenticationService.login({
+            email: this.email,
+            password: this.password
+          });
         }
     }
 }

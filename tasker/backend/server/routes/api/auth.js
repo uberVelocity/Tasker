@@ -5,8 +5,11 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 
+
 // Post auth
 router.post("/register", async (req, res) => {
+  console.log('attempting to register user');
+
   // Validate data before making user
   const { error } = await registerValidation(req.body);
   if (error) {
@@ -39,6 +42,8 @@ router.post("/register", async (req, res) => {
 
 // Login
 router.post("/login", async (req, res) => {
+  console.log('logging in user');
+
   // Validate user
   const { error } = await loginValidation(req.body);
   if (error) {
@@ -57,10 +62,11 @@ router.post("/login", async (req, res) => {
     return res.status(400).send('Invalid password');
   }
 
-  // Create and assign a JSON Web Token
-  const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+  // Create and assign a JSON Web Token (string should be replaced by .env variable)
+  const token = jwt.sign({_id: user._id}, '124aww12423ad24124awdrtaeNADAIUASNFI@$h1247asd');
+  res.set('auth-token'. token);
   res.header('auth-token', token).send(token);
-
+  console.log(`headers: ${req.headers}`);
 });
 
 module.exports = router;
