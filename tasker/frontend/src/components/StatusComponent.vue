@@ -1,15 +1,37 @@
 <template>
   <div class="container">
-    <h1>Server dashboard status</h1>
 
+    <h1>Server dashboard status</h1>
+      <div class="row">
+        <div class="serverlist col s6">
+          <ul class="servers">
+          </ul>
+        </div>
+        <div class="serverlist col s6">
+          <ul class="servers">
+            <BarComponent/>
+          </ul>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
+import BarComponent from './charts/BarComponent';
+
 export default {
+
   name: 'Status',
+  components: BarComponent,
   data() {
-    return {};
+    return {
+      serverNames: [],
+      timeStamps: [],
+      values: []
+    };
+  },
+  mounted() {
+    this.renderChart()
   }
 };
 

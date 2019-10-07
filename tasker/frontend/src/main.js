@@ -8,6 +8,7 @@ import LoginComponent from './components/LoginComponent'
 import RegisterComponent from './components/RegisterComponent'
 import HomeComponent from './components/HomeComponent';
 import StatusComponent from './components/StatusComponent';
+import BarComponent from './components/charts/BarComponent';
 
 Vue.config.productionTip = false;
 
@@ -43,6 +44,11 @@ const routes = [
     path: '/dashboard/status',
     name: 'Status',
     component: StatusComponent
+  },
+  {
+    path: '/chart',
+    name: 'Chart',
+    component: BarComponent
   }
 ];
 

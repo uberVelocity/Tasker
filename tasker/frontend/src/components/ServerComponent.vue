@@ -6,6 +6,7 @@
         <button class="waves-effect waves-light btn" @click="goLogin">Login</button>
         <button class="waves-effect waves-light btn" @click="goRegister">Register</button>
         <button class="waves-effect waves-light btn" @click="goStatus">Status</button>
+        <button class="waves-effect waves-light btn" @click="goChart">Chart</button>
     </div>
     <h1>All servers</h1>
     <!-- CREATE SERVER HERE -->
@@ -100,6 +101,9 @@ export default {
     },
     goStatus() {
       this.$router.push('/dashboard/status');
+    },
+    goChart() {
+      this.$router.push('/chart');
     },
     onChangeEnergy() {
       document.getElementById('energyLabel').style.display = 'none';

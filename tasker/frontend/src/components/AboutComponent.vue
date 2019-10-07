@@ -7,7 +7,6 @@
 
 <script>
 import ServerService from "../services/ServerService";
-
 export default {
   data() {
     return {
