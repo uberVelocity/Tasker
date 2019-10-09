@@ -8,6 +8,7 @@
         <button class="waves-effect waves-light btn" @click="goStatus">Status</button>
         <button class="waves-effect waves-light btn" @click="goChart">Chart</button>
     </div>
+    <label> token: {{token}} </label>
     <h1>All servers</h1>
     <!-- CREATE SERVER HERE -->
     <div class="create-server">
@@ -67,7 +68,8 @@ export default {
       text: '',
       selectedEnergy: '',
       selectedLocation: '',
-      ppgw: '0 '
+      ppgw: '0 ',
+      token: localStorage.getItem('authorization') || null
     }
   },
   async created() {

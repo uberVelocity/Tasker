@@ -4,7 +4,7 @@ const router = express.Router();
 const verify = require('../private/verifyToken');
 
 // Get Servers (/ refers to /api/servers)
-router.get('/', verify, async (req, res) => {
+router.get('/', verify,  async (req, res) => {
     const servers = await loadServersCollection();
     res.send(await servers.find({}).toArray());
 });
