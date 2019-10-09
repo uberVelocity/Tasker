@@ -4,7 +4,7 @@ const url = 'api/debugger/';
 
 class DebuggerService {
     static async sendMessage(message) {
-        await axios.get(url + 'log', {
+        await axios.post(url + 'log', {
             message
         });
     }

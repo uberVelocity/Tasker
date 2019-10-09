@@ -37,7 +37,7 @@ export default {
             await DebuggerService.sendMessage({
               message: 'register vue:'
             });
-            await DebuggerService.sendMessage(res.body);
+            await DebuggerService.sendMessage(res);
             
 
             localStorage.setItem('authtoken', res.body.authtoken);

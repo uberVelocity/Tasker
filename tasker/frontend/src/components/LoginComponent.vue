@@ -34,7 +34,9 @@ export default {
           await DebuggerService.sendMessage({
             message: 'logging in'
           });
-          this.response = res.headers.get('auth-token');
+          // await DebuggerService.sendMessage(res);
+          await DebuggerService.sendMessage(res.headers['auth-token']);
+          this.response = res.headers['auth-token'];
         }
     }
 }
