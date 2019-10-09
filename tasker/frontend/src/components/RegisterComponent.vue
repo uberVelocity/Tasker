@@ -16,6 +16,7 @@
 
 <script>
 import AuthenticationService from '../services/AuthenticationService';
+import DebuggerService from '../services/DebuggerService';
 
 export default {
     data() {
@@ -28,12 +29,18 @@ export default {
     },
     methods: {
         async register() {
-            const response = await AuthenticationService.register({
+            const res = await AuthenticationService.register({
                 name: this.name,
                 email: this.email,
                 password: this.password
             });
-            alarm(response);
+            await DebuggerService.sendMessage({
+              message: 'register vue:'
+            });
+            await DebuggerService.sendMessage(res.body);
+            
+
+            localStorage.setItem('authtoken', res.body.authtoken);
         }
     }
 }

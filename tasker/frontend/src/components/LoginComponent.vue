@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-      <form @submit.prevent="login" class="login">
         <h1>Sign in</h1>
         <label>Username</label>
         <input required v-model="email" type="text" placeholder="Email">
@@ -8,14 +7,14 @@
         <label>Password</label>
         <input required v-model="password" type="password" placeholder="Password">
         <hr/>
-        <button type="waves-effect waves-default btn">Login</button>
-      </form> 
+        <button @click="login" type="waves-effect waves-default btn">Login</button>
       <label>Response: {{response}} </label>
     </div>
 </template>
 
 <script>
 import AuthenticationService from '../services/AuthenticationService';
+import DebuggerService from '../services/DebuggerService';
 
 export default {
     name: 'Login',
@@ -32,6 +31,10 @@ export default {
             email: this.email,
             password: this.password
           });
+          await DebuggerService.sendMessage({
+            message: 'logging in'
+          });
+          this.response = res.headers.get('auth-token');
         }
     }
 }

@@ -13,12 +13,14 @@ router.post("/register", async (req, res) => {
   // Validate data before making user
   const { error } = await registerValidation(req.body);
   if (error) {
+    console.log(error);
     return res.status(400).send(error.details[0].message);
   }
 
   // Check if user already in db
   const emailExists = await User.findOne({ email: req.body.email });
   if (emailExists) {
+    console.log('email already exists');
     return res.status(400).send("Email already exists");
   }
 
@@ -64,9 +66,11 @@ router.post("/login", async (req, res) => {
 
   // Create and assign a JSON Web Token (string should be replaced by .env variable)
   const token = jwt.sign({_id: user._id}, '124aww12423ad24124awdrtaeNADAIUASNFI@$h1247asd');
-  res.set('auth-token'. token);
-  res.header('auth-token', token).send(token);
-  console.log(`headers: ${req.headers}`);
+  res.set('auth-token', token);
+  res.json({
+    authtoken: token
+  });
+
 });
 
 module.exports = router;

@@ -1,10 +1,11 @@
 import axios from 'axios';
+import DebuggerService from '../services/DebuggerService';
 
 const url = 'api/user/';
 
 class AuthenticationService {
     static async register(credentials) {
-        const resResult = await axios.post('api/user/register', {
+        return await axios.post(url + 'register', {
             name: credentials.name,
             email: credentials.email,
             password: credentials.password
@@ -12,7 +13,7 @@ class AuthenticationService {
     }
 
     static async login(credentials) {
-        const resResult = await axios.post('api/user/login', {
+        return await axios.post('api/user/login', {
             email: credentials.email,
             password: credentials.password
         });
