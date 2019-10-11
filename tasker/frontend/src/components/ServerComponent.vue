@@ -7,6 +7,7 @@
         <button class="waves-effect waves-light btn" @click="goRegister">Register</button>
         <button class="waves-effect waves-light btn" @click="goStatus">Status</button>
         <button class="waves-effect waves-light btn" @click="goChart">Chart</button>
+        <button class="waves-effect waves-light btn right" @click="logout">Log out</button>
     </div>
     <h1>All servers</h1>
     <!-- CREATE SERVER HERE -->
@@ -57,6 +58,7 @@
 
 <script>
 import ServerService from '../services/ServerService';
+import DebuggerService from '../services/DebuggerService';
 
 export default {
   name: 'ServerComponent',
@@ -79,13 +81,18 @@ export default {
   },
   methods: {
     async createServer() {
+      await DebuggerService.sendMessage(localStorage.getItem('authorization'));
       await ServerService.insertServer(this.text, localStorage.getItem('authorization'));
-      this.servers = await ServerService.getServers();
+      this.servers = await ServerService.getServers(localStorage.getItem('authorization'));
       this.text = '';
     },
     async deleteServer(id) {
       await ServerService.deleteServer(id, localStorage.getItem('authorization'));
-      this.servers = await ServerService.getServers();
+      this.servers = await ServerService.getServers(localStorage.getItem('authorization'));
+    },
+    async logout() {
+      localStorage.removeItem('authorization');
+      this.$router.push('/login');
     },
     goHome() {
       this.$router.push('/');

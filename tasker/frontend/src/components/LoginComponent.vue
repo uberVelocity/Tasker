@@ -17,7 +17,6 @@
 
 <script>
 import AuthenticationService from '../services/AuthenticationService';
-import DebuggerService from '../services/DebuggerService';
 
 export default {
     name: 'Login',
@@ -34,14 +33,10 @@ export default {
           email: this.email,
           password: this.password
         });
-        await DebuggerService.sendMessage({
-          message: 'logging in'
-        });
-        localStorage.setItem('authorization', res.headers['authorization']);
-        // await DebuggerService.sendMessage(res.headers);
         if (res.headers['authorization']) {
           // Save the token in local storage and redirect
-          this.response = 'valid authentication';
+          localStorage.setItem('authorization', res.headers['authorization']);
+          this.$router.push('/servers');
         }
         else {
           // Failed authentication
