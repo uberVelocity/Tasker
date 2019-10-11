@@ -66,8 +66,8 @@
       >
         {{ `${server.createdAt.getDate()}/${server.createdAt.getMonth()}/${server.createdAt.getYear()}` }}
         <p class="text white-text">{{server.text}}</p>
-        <div class="energy">{{`Energy: ${server.energy}`}}</div>
-        <div class="location">{{`Location: ${server.location}`}}</div>
+        <div class="energy"><i class="material-icons">flash_on</i>{{`Energy: ${server.energy}`}}</div>
+        <div class="location"><i class="material-icons">location_on</i>{{`Location: ${server.location}`}}</div>
         <button class="waves-effect waves-light btn analytics right">Analytics</button>
       </div>
     </div>
@@ -135,7 +135,7 @@ export default {
     },
     async logout() {
       localStorage.removeItem("authorization");
-      this.$router.push("/login");
+      this.$router.push("/");
     },
     goHome() {
       this.$router.push("/");
@@ -165,16 +165,16 @@ export default {
     computePPGW() {
       // Hardcoded energy values, maybe should be replaced by actual data.
       switch (this.selectedEnergy) {
-        case "solar":
+        case "Solar":
           this.ppgw = 0.013;
           break;
-        case "wind":
+        case "Wind":
           this.ppgw = 0.009;
           break;
-        case "coal":
+        case "Coal":
           this.ppgw = 0.031;
           break;
-        case "uranium":
+        case "Uranium":
           this.ppgw = 0.131;
           break;
         default:

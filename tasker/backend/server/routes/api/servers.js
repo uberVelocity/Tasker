@@ -9,14 +9,6 @@ router.get('/', verify, async (req, res) => {
     res.send(await servers.find({}).toArray());
 });
 
-// Debug route
-router.post('/pizza', async (req, res) => {
-    console.log('some text received');
-    await res.status(200).json({
-        text: 'newTitle'
-    }).send();
-});
-
 // Add Servers
 router.post('/', verify, async (req, res) => {
     const servers = await loadServersCollection();
