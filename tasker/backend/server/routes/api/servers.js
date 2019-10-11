@@ -4,7 +4,7 @@ const router = express.Router();
 const verify = require('../private/verifyToken');
 
 // Get Servers (/ refers to /api/servers)
-router.get('/', verify,  async (req, res) => {
+router.get('/', verify, async (req, res) => {
     const servers = await loadServersCollection();
     res.send(await servers.find({}).toArray());
 });
@@ -18,7 +18,7 @@ router.post('/pizza', async (req, res) => {
 });
 
 // Add Servers
-router.post('/', async (req, res) => {
+router.post('/', verify, async (req, res) => {
     const servers = await loadServersCollection();
     await servers.insertOne({
         text: req.body.text,
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
 });
 
 // Delete Servers
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verify, async (req, res) => {
     const servers = await loadServersCollection();
     await servers.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
     res.status(200).send();

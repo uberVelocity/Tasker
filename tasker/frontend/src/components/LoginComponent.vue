@@ -37,10 +37,16 @@ export default {
         await DebuggerService.sendMessage({
           message: 'logging in'
         });
-        // await DebuggerService.sendMessage(res);
-        await DebuggerService.sendMessage(res.headers['authorization']);
-        this.response = res.headers['authorization'];
-        localStorage.setItem('authorization', this.response);
+        localStorage.setItem('authorization', res.headers['authorization']);
+        // await DebuggerService.sendMessage(res.headers);
+        if (res.headers['authorization']) {
+          // Save the token in local storage and redirect
+          this.response = 'valid authentication';
+        }
+        else {
+          // Failed authentication
+          this.response = 'Invalid password or email'
+        }
       },
       goServers() {
         this.$router.push('/servers');

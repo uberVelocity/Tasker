@@ -8,7 +8,6 @@
         <button class="waves-effect waves-light btn" @click="goStatus">Status</button>
         <button class="waves-effect waves-light btn" @click="goChart">Chart</button>
     </div>
-    <label> token: {{token}} </label>
     <h1>All servers</h1>
     <!-- CREATE SERVER HERE -->
     <div class="create-server">
@@ -68,25 +67,24 @@ export default {
       text: '',
       selectedEnergy: '',
       selectedLocation: '',
-      ppgw: '0 ',
-      token: localStorage.getItem('authorization') || null
+      ppgw: '0 '
     }
   },
   async created() {
     try {
-      this.servers = await ServerService.getServers();
+      this.servers = await ServerService.getServers(localStorage.getItem('authorization') || null);
     } catch(err) {
       this.error = err.message;
     }
   },
   methods: {
     async createServer() {
-      await ServerService.insertServer(this.text);
+      await ServerService.insertServer(this.text, localStorage.getItem('authorization'));
       this.servers = await ServerService.getServers();
       this.text = '';
     },
     async deleteServer(id) {
-      await ServerService.deleteServer(id);
+      await ServerService.deleteServer(id, localStorage.getItem('authorization'));
       this.servers = await ServerService.getServers();
     },
     goHome() {

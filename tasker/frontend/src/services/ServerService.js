@@ -4,10 +4,15 @@ const url = 'api/servers/';
 
 class ServerService {
     // Get Servers
-    static getServers() {
+    static getServers(token) {
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await axios.get(url);
+                const config = {
+                    headers: {
+                        authorization: token
+                    }
+                }
+                const res = await axios.get(url, config);
                 const data = res.data;
                 resolve(
                     data.map(server => ({
@@ -26,15 +31,25 @@ class ServerService {
     }
 
     // Create Posts
-    static insertServer(text) {
+    static insertServer(text, token) {
+        const config = {
+            headers: {
+                authorization: token
+            }
+        }
         return axios.post(url, {
             text
-        });
+        }, config);
     }
 
     // Delete Posts
-    static deleteServer(id) {
-        return axios.delete(`${url}${id}`);
+    static deleteServer(id, token) {
+        const config = {
+            headers: {
+                authorization: token
+            }
+        }
+        return axios.delete(`${url}${id}`, config);
     }
 }
 

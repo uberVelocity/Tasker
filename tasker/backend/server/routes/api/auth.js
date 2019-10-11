@@ -55,19 +55,20 @@ router.post("/login", async (req, res) => {
   // Check if email exists
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
+    console.log('invalid email');
     return res.status(400).send('Email is wrong');
   }
 
   // Check if password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) {
+    console.log('invalid password');
     return res.status(400).send('Invalid password');
   }
 
   // Create and assign a JSON Web Token (string should be replaced by .env variable)
   const token = jwt.sign({_id: user._id}, '124aww12423ad24124awdrtaeNADAIUASNFI@$h1247asd');
-  res.set('authorization', `Bearer ${token}`).send();
-
+  res.set('authorization', `${token}`).send();
 });
 
 module.exports = router;
