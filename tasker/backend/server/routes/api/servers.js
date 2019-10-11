@@ -21,7 +21,9 @@ router.post('/pizza', async (req, res) => {
 router.post('/', verify, async (req, res) => {
     const servers = await loadServersCollection();
     await servers.insertOne({
-        text: req.body.text,
+        text: req.body.serverData.text,
+        energy: req.body.serverData.energy,
+        location: req.body.serverData.location,
         createdAt: new Date()
     });
     

@@ -1,53 +1,58 @@
 <template>
   <div class="container">
-    <nav>
-      <button @click="goServers">Servers</button>
-    </nav>
+    <button class="waves-effect waves-light btn" @click="goServers">Servers</button>
     <h1>Sign in</h1>
     <label>Username</label>
     <input required v-model="email" type="text" placeholder="Email" />
     <br />
     <label>Password</label>
     <input required v-model="password" type="password" placeholder="Password" />
-    <hr />
-    <button @click="login" type="waves-effect waves-default btn">Login</button>
-    <label>Response: {{response}}</label>
+    <button
+      class="waves-effect waves-light btn"
+      @click="login"
+      type="waves-effect waves-default btn"
+    >Login</button>
+    <br />
+    <label v-if="response">Response: {{response}}</label>
   </div>
 </template>
 
 <script>
-import AuthenticationService from '../services/AuthenticationService';
+import AuthenticationService from "../services/AuthenticationService";
 
 export default {
-    name: 'Login',
-    data() {
-      return {
-        response: '',
-        email: '',
-        password: ''
+  name: "Login",
+  data() {
+    return {
+      email: "",
+      password: "",
+      response: "Unchanged response"
+    };
+  },
+  methods: {
+    async login() {
+      const res = await AuthenticationService.login({
+        email: this.email,
+        password: this.password
+      });
+      // Check for authorization header existance
+      if (res.headers["authorization"]) {
+        // Save the token in local storage and redirect
+        localStorage.setItem("authorization", res.headers["authorization"]);
+        this.$router.push("/servers");
+        this.response = "if you see this you're in deep shit";
+      }
+      // Failed authentication
+      else {
+        // Display reason for failed authentication
+        this.response = res.body;
       }
     },
-    methods: {
-      async login() {
-        const res = await AuthenticationService.login({
-          email: this.email,
-          password: this.password
-        });
-        if (res.headers['authorization']) {
-          // Save the token in local storage and redirect
-          localStorage.setItem('authorization', res.headers['authorization']);
-          this.$router.push('/servers');
-        }
-        else {
-          // Failed authentication
-          this.response = 'Invalid password or email'
-        }
-      },
-      goServers() {
-        this.$router.push('/servers');
-      }
+    goServers() {
+      this.$router.push("/servers");
     }
-}
+  }
+};
 </script>
 
 <style scoped>

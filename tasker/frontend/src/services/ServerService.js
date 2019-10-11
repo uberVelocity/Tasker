@@ -31,14 +31,14 @@ class ServerService {
     }
 
     // Create Posts
-    static insertServer(text, token) {
+    static insertServer(serverData, token) {
         const config = {
             headers: {
                 authorization: token
             }
         }
         return axios.post(url, {
-            text
+            serverData
         }, config);
     }
 

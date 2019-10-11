@@ -5,18 +5,21 @@ const url = 'api/user/';
 
 class AuthenticationService {
     static async register(credentials) {
-        return await axios.post(url + 'register', {
+        const response = await axios.post(url + 'register', {
             name: credentials.name,
             email: credentials.email,
             password: credentials.password
         });
+        return response;
     }
 
     static async login(credentials) {
-        return await axios.post('api/user/login', {
+        const response = await axios.post(url + 'login', {
             email: credentials.email,
             password: credentials.password
         });
+        await DebuggerService.sendMessage(response);
+        return response;
     }
 }
 

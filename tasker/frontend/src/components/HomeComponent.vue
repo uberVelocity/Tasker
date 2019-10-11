@@ -3,19 +3,17 @@
     <nav class="nav-wrapper white z-depth-0">
       <button class="waves-effect waves-light btn" @click="goAbout">About</button>
       <button class="waves-effect waves-light btn" @click="goServers">Servers</button>
-      <form action>
         <ul class="right">
           <li>
-            <input type="text" placeholder="Username" />
+            <input type="text" placeholder="Username" required v-model="email"/>
           </li>
           <li>
-            <input type="password" placeholder="Password" />
+            <input type="password" placeholder="Password" required v-model="password"/>
           </li>
           <li>
-            <button class="z-depth-0 waves-effect waves-light btn login">Log in</button>
+            <button class="z-depth-0 waves-effect waves-light btn login" @click="login">Log in</button>
           </li>
         </ul>
-      </form>
     </nav>
     <div class="row">
       <div class="col s7">
@@ -25,9 +23,9 @@
         <h2>Run tasks. Smartly.</h2>
         <h4>Join Tasker to run your tasks today!</h4>
         <br/>
-        <button class="z-depth-0 btn waves-effect waves-light sign">Sign up</button>
+        <button class="z-depth-0 btn waves-effect waves-light sign" @click="goRegister">Sign up</button>
         <br>
-        <button class="z-depth-0 btn waves-effect waves-light loginunder">Log in</button>
+        <button class="z-depth-0 btn waves-effect waves-light loginunder" @click="goLogin">Log in</button>
       </div>
     </div>
   </div>
@@ -35,14 +33,17 @@
 
 <script>
 import io from "socket.io-client";
+import AuthenticationService from '../services/AuthenticationService';
 
 export default {
   name: "HomeComponent",
   data() {
     return {
       isConnected: "false",
-      socket: io("localhost:4001")
-    };
+      socket: io("localhost:4001"),
+      email: '',
+      password: ''
+    }
   },
   methods: {
     goAbout() {
@@ -50,6 +51,25 @@ export default {
     },
     goServers() {
       this.$router.push("/servers");
+    },
+    async login() {
+      const res = await AuthenticationService.login({
+        email: this.email,
+        password: this.password
+      });
+      // Check for authorization header existance
+      if (res.headers["authorization"]) {
+        // Save the token in local storage and redirect
+        localStorage.setItem("authorization", res.headers["authorization"]);
+        this.$router.push("/servers");
+        this.response = "if you see this you're in deep shit";
+      }
+    },
+    goLogin() {
+      this.$router.push("/login")
+    },
+    goRegister() {
+      this.$router.push("/register")
     },
     getHistory(e) {
       e.preventDefault();
@@ -101,6 +121,10 @@ button {
   padding: 0px 20px;
 }
 
+.btn:focus {
+  background-color: #6c63ff;
+}
+
 .sign {
     border-radius: 20px;
     padding: 0px 180px;
@@ -128,6 +152,14 @@ button {
     border: 1px solid #6c63ff;
     color: #6c63ff;
     font-weight: bold;
+}
+
+.login:focus {
+  background-color: white;
+}
+
+.loginunder:focus {
+  background-color: white;
 }
 
 .btn:hover {
@@ -161,7 +193,4 @@ input {
   box-shadow: 0 1px 0 0 #6c63ff !important;
 }
 
-.btn:focus {
-  background-color: #6c63ff;
-}
 </style>

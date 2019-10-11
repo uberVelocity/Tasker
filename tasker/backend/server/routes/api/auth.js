@@ -49,6 +49,7 @@ router.post("/login", async (req, res) => {
   // Validate user
   const { error } = await loginValidation(req.body);
   if (error) {
+    console.log('error with the form');
     return res.status(400).send(error.details[0].message);
   }
 
@@ -56,14 +57,14 @@ router.post("/login", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     console.log('invalid email');
-    return res.status(400).send('Email is wrong');
+    return res.status(400).send('invalid email');
   }
 
   // Check if password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) {
     console.log('invalid password');
-    return res.status(400).send('Invalid password');
+    return res.status(400).send('invalid email');
   }
 
   // Create and assign a JSON Web Token (string should be replaced by .env variable)
