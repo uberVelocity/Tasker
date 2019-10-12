@@ -9,6 +9,9 @@ import RegisterComponent from './components/RegisterComponent'
 import HomeComponent from './components/HomeComponent';
 import StatusComponent from './components/StatusComponent';
 import BarComponent from './components/charts/BarComponent';
+import UserComponent from './components/UserComponent';
+import ChatComponent from './components/ChatComponent';
+
 
 Vue.config.productionTip = false;
 
@@ -49,6 +52,16 @@ const routes = [
     path: '/chart',
     name: 'Chart',
     component: BarComponent
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: UserComponent
+  },
+  {
+    path: '/chat',
+    name: 'Chat',
+    component: ChatComponent
   }
 ];
 

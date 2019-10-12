@@ -28,11 +28,17 @@ export default {
     },
     methods: {
         async register() {
-            await AuthenticationService.register({
+            const response = await AuthenticationService.register({
                 name: this.name,
                 email: this.email,
                 password: this.password
             });
+            if (response.data.user) {
+              this.$router.push('/login');
+            }
+            else {
+              this.response = 'invalid fields';
+            }
         }
     }
 }

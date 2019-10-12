@@ -26,11 +26,13 @@ const servers = require('./routes/api/servers');
 const auth = require('./routes/api/auth');
 const about = require('./routes/api/about');
 const debug = require('./routes/api/debugger');
+const info = require('./routes/api/info');
 
 app.use('/api/servers', servers);
 app.use('/api/user', auth);
 app.use('/api/about', about);
 app.use('/api/debugger', debug);
+app.use('/api/info', info);
 
 const port = process.env.PORT || 5000;
 

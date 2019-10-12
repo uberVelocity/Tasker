@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    tasks: [{title: String, complexity: Number, from: Date, to: Date, cost: Number, envFriendly: Boolean}]
 });
 
 module.exports = mongoose.model('User', userSchema);

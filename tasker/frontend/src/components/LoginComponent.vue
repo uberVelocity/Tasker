@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <button class="waves-effect waves-light btn" @click="goServers">Servers</button>
+    <button class="waves-effect waves-light btn" @click="goRegister">Register</button>
     <h1>Sign in</h1>
     <label>Username</label>
     <input required v-model="email" type="text" placeholder="Email" />
@@ -50,6 +51,9 @@ export default {
     },
     goServers() {
       this.$router.push("/servers");
+    },
+    goRegister() {
+      this.$router.push("/register");
     }
   }
 };

@@ -3,6 +3,7 @@
     <nav class="nav-wrapper white z-depth-0">
       <button class="waves-effect waves-light btn" @click="goAbout">About</button>
       <button class="waves-effect waves-light btn" @click="goServers">Servers</button>
+      <button class="waves-effect waves-light btn" @click="goUser">User dashboard</button>
         <ul class="right">
           <li>
             <input type="text" placeholder="Username" required v-model="email"/>
@@ -50,7 +51,20 @@ export default {
       this.$router.push("/about");
     },
     goServers() {
-      this.$router.push("/servers");
+      if (!localStorage.getItem('authorization')) {
+        this.$router.push('/login');
+      }
+      else {
+        this.$router.push("/servers");
+      }
+    },
+    goUser() {
+      if (!localStorage.getItem('authorization')) {
+        this.$router.push('/login');
+      }
+      else {
+        this.$router.push('/user');
+      }
     },
     async login() {
       const res = await AuthenticationService.login({

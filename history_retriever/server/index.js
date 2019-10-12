@@ -16,17 +16,21 @@ app.use('/api/history', history);
 
 const port = process.env.PORT || 4001;
 
+const users = [];
+const connections = [];
 
 server.listen(port, () => console.log(`History retriever operational on port ${port}`));
 
-io.on('connection', (socket) => {
-    console.log(`a user has connected: ${socket.id}`);
-
+io.sockets.on('connection', (socket) => {
+    connections.push(socket);
+    console.log(`a user has connected: ${connections.length} connected`);
+    
     socket.on('HELLO_MESSAGE', (data) => {
         console.log('received hello message from the front-end with message: ' + data.message);
     });
 
-    io.on('disconnect', () => {
-        console.log('a user has disconnected...');
+    socket.on('disconnect', (data) => {
+        connections.splice(connections.indexOf(socket, 1));
+        console.log(`a user has disconnected: ${connections.length} connected`);
     });
 });
