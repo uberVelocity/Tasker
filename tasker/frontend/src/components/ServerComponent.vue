@@ -68,7 +68,7 @@
         <p class="text white-text">{{server.text}}</p>
         <div class="energy"><i class="material-icons">flash_on</i>{{`Energy: ${server.energy}`}}</div>
         <div class="location"><i class="material-icons">location_on</i>{{`Location: ${server.location}`}}</div>
-        <button class="waves-effect waves-light btn analytics">Analytics</button>
+        <button class="waves-effect waves-light btn analytics" @click="goChart">Analytics</button>
       </div>
     </div>
   </div>
