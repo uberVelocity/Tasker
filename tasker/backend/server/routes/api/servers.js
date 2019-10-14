@@ -4,7 +4,7 @@ const router = express.Router();
 const verify = require('../private/verifyToken');
 
 // Get Servers (/ refers to /api/servers)
-router.get('/', verify, async (req, res) => {
+router.get('/', async (req, res) => {
     const servers = await loadServersCollection();
     res.send(await servers.find({}).toArray());
 });
@@ -17,7 +17,7 @@ router.post('/pizza', (req, res) => {
 });
 
 // Add Servers
-router.post('/', verify, async (req, res) => {
+router.post('/',  async (req, res) => {
     const servers = await loadServersCollection();
     await servers.insertOne({
         text: req.body.serverData.text,
@@ -30,7 +30,7 @@ router.post('/', verify, async (req, res) => {
 });
 
 // Delete Servers
-router.delete('/:id', verify, async (req, res) => {
+router.delete('/:id',  async (req, res) => {
     const servers = await loadServersCollection();
     await servers.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
     res.status(200).send();
@@ -38,7 +38,7 @@ router.delete('/:id', verify, async (req, res) => {
 
 // Connect to servers collection
 async function loadServersCollection() {
-    const client = await mongodb.MongoClient.connect('mongodb://localhost:27017-27019/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/tasker', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

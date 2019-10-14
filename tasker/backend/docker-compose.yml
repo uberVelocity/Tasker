@@ -1,0 +1,24 @@
+version: '3'
+services:
+  tasker:
+    container_name: tasker
+    restart: always # if it fails, it attempts to restart the node
+    build: .
+    ports:
+      - '5000:5000'
+    links: # links tasker to database
+      - mongo-node
+  mongo-node:
+    container_name: mongo-node
+    image: mongo:4.0.4
+    ports:
+      - '27017:27017'
+  front-end:
+    container_name: front-end
+    restart: always
+    build: ../frontend
+    ports:
+      - '80:80'
+    links:
+      - tasker
+

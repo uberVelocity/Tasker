@@ -13,5 +13,5 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["node", "server/index.js", "--host", "0.0.0.0"]
+CMD ["node", "server/index.js"]
 
