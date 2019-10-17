@@ -19,8 +19,6 @@ const port = process.env.PORT || 4001;
 const users = [];
 const connections = [];
 
-server.listen(port, () => console.log(`History retriever operational on port ${port}`));
-
 io.sockets.on('connection', (socket) => {
     connections.push(socket);
     console.log(`a user has connected: ${connections.length} connected`);
@@ -33,4 +31,17 @@ io.sockets.on('connection', (socket) => {
         connections.splice(connections.indexOf(socket, 1));
         console.log(`a user has disconnected: ${connections.length} connected`);
     });
+
+    // Send message
+    socket.on('send message', (data) => {
+        console.log(data.message);
+        io.sockets.emit('new message', {
+            message: data.message,
+            sender: data.sender
+        });
+    });
 });
+
+server.listen(port, () => console.log(`History retriever operational on port ${port}`));
+
+

@@ -33,15 +33,12 @@
 </template>
 
 <script>
-import io from "socket.io-client";
 import AuthenticationService from '../services/AuthenticationService';
 
 export default {
   name: "HomeComponent",
   data() {
     return {
-      isConnected: "false",
-      socket: io("localhost:4001"),
       email: '',
       password: '',
       debugNumber: 0
@@ -85,13 +82,6 @@ export default {
     },
     goRegister() {
       this.$router.push("/register")
-    },
-    getHistory(e) {
-      e.preventDefault();
-
-      this.socket.emit("HELLO_MESSAGE", {
-        message: "hello"
-      });
     }
   }
 };
