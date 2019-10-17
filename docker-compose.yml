@@ -3,7 +3,7 @@ services:
   tasker:
     container_name: tasker
     restart: always # if it fails, it attempts to restart the node
-    build: .
+    build: tasker/backend
     ports:
       - '5000:5000'
     links: # links tasker to database
@@ -16,9 +16,14 @@ services:
   front-end:
     container_name: front-end
     restart: always
-    build: ../frontend
+    build: tasker/frontend
     ports:
       - '80:80'
     links:
       - tasker
-
+  history-retriever:
+    container_name: history
+    restart: always
+    build: history_retriever
+    ports:
+      - '4001:4001'

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'api/servers/';
+const url = '/api/servers/';
 
 class ServerService {
     // Get Servers
@@ -27,7 +27,7 @@ class ServerService {
     }
 
     static getAbout() {
-        return axios.post('api/servers/pizza');
+        return axios.post('/api/servers/pizza');
     }
 
     // Create Posts
