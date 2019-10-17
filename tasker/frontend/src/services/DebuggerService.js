@@ -9,9 +9,9 @@ class DebuggerService {
         });
     }
 
-    static async serveNumber() {
-        return await axios.get(url + 'number');
-    }
+    // static async serveNumber() {
+    //     return await axios.get(url + 'number');
+    // }
 }
 
 export default DebuggerService; 
