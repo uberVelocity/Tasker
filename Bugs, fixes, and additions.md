@@ -9,8 +9,9 @@
 
 ## Back-end
 
-- Stream chat through websockets (**PORT THE SERVICES ON ANOTHER SERVER**)
-- Create and stream server data through websockets 
+- [x] Stream chat through websockets 
+- [x] Port the chat service on another server
+- [ ] Create and stream server data through websockets 
 
 ## Database(s)
 
