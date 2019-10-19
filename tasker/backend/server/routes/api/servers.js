@@ -38,7 +38,7 @@ router.delete('/:id', verify, async (req, res) => {
 
 // Connect to servers collection
 async function loadServersCollection() {
-    const client = await mongodb.MongoClient.connect('mongodb://localhost:27017-27019/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/tasker', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

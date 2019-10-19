@@ -15,7 +15,8 @@
 
 ## Database(s)
 
-- Replicate MongoDB database
+- Replicate MongoDB database - **TO BE DONE TODAY** (also in docker)
+- Dockerize CassandraDB database
 - Replicate CassandraDB database
 - Store tasks per user in database
 

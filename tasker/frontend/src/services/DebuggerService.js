@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = '/api/debugger/';
+const url = 'http://localhost:5000/api/debugger/';
 
 class DebuggerService {
     static async sendMessage(message) {

@@ -37,17 +37,11 @@ export default {
         password: this.password
       });
       // Check for authorization header existance
-      if (res.headers["authorization"]) {
-        // Save the token in local storage and redirect
-        localStorage.setItem("authorization", res.headers["authorization"]);
-        this.$router.push("/servers");
-      }
-      // Failed authentication
-      else {
-        // Display reason for failed authentication
-        this.response = res.body;
-      }
-    },
+      // Save the token in local storage and redirect
+      console.log('setting authorization header');
+      localStorage.setItem("authorization", res.headers["authorization"]);
+      this.$router.push("/servers");
+      },
     goServers() {
       this.$router.push("/servers");
     },
