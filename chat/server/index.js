@@ -38,6 +38,6 @@ io.sockets.on('connection', (socket) => {
     });
 });
 
-server.listen(port, () => console.log(`History retriever operational on port ${port}`));
+server.listen(port, () => console.log(`Chat server operational on port ${port}`));
 
 

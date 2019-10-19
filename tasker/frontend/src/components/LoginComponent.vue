@@ -40,7 +40,12 @@ export default {
       // Save the token in local storage and redirect
       console.log('setting authorization header');
       const token = res.data.authorization;
-      localStorage.setItem("authorization", token);
+      if (token) {
+        localStorage.setItem("authorization", token);
+      }
+      else {
+        this.response = 'Failed to login!'; 
+      }
       this.$router.push("/servers");
       },
     goServers() {

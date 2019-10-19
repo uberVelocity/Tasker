@@ -1,4 +1,9 @@
 version: '3'
+
+networks:
+  isolation-network:
+    driver: bridge
+
 services:
   tasker:
     container_name: tasker
@@ -8,22 +13,40 @@ services:
       - '5000:5000'
     links: # links tasker to database
       - mongo-node
+    networks:
+      - isolation-network
+    
   mongo-node:
     container_name: mongo-node
     image: mongo:4.0.4
     ports:
       - '27017:27017'
+    networks:
+      - isolation-network
+
   front-end:
     container_name: front-end
     restart: always
     build: tasker/frontend
     ports:
       - '80:80'
-    links:
-      - tasker
+    networks:
+      - isolation-network
+
   history-retriever:
     container_name: history
     restart: always
     build: history_retriever
     ports:
+      - '4002:4002'
+    networks:
+      - isolation-network
+
+  chat:
+    container_name: chat
+    restart: always
+    build: chat
+    ports:
       - '4001:4001'
+    networks:
+      - isolation-network

@@ -1,7 +1,7 @@
 FROM node:10
 
 # Create app directory
-WORKDIR back-end
+WORKDIR backend
 
 # Install app dependencies
 COPY package*.json ./
