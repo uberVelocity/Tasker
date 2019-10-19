@@ -39,7 +39,8 @@ export default {
       // Check for authorization header existance
       // Save the token in local storage and redirect
       console.log('setting authorization header');
-      localStorage.setItem("authorization", res.headers["authorization"]);
+      const token = res.data.authorization;
+      localStorage.setItem("authorization", token);
       this.$router.push("/servers");
       },
     goServers() {
