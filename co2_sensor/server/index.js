@@ -44,7 +44,7 @@ async function generateCo2() {
 }
 
 async function getServersListFromMongo() {
-    const client = await mongodb.MongoClient.connect('mongodb://localhost:27017/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/tasker', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

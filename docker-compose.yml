@@ -50,3 +50,14 @@ services:
       - '4001:4001'
     networks:
       - isolation-network
+  
+  cassandra-cluster:
+    container_name: cassandra-cluster
+    restart: always
+    image: ce5334a7b86c
+    networks:
+      - isolation-network
+    volumes:
+      - cassandra-volume:/var/lib/cassandra
+volumes:
+  cassandra-volume:

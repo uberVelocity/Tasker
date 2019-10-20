@@ -4,7 +4,7 @@
 
 - Display reason for not being able to log in / sign up
 - Finish view for client
-- Finish web chat
+- Finish web chat - Done
 - Finish charts per server  
 
 ## Back-end
@@ -27,4 +27,24 @@
 - Deploy application on Google Cloud
 
 ## Done :)
+
+
+
+
+
+# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
