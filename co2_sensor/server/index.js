@@ -4,14 +4,14 @@ const dotenv = require('dotenv');
 
 const localDatacenter = 'datacenter1';
 const cassandra = require('cassandra-driver');
-const contactPoints = ['172.17.0.3', '172.17.0.3', '172.17.0.3'];
+const contactPoints = ['172.17.0.1', '172.17.0.1', '172.17.0.1'];
 const loadBalancingPolicy = new cassandra.policies.loadBalancing.DCAwareRoundRobinPolicy(localDatacenter); 
 const clientOptions = {
    policies : {
       loadBalancing : loadBalancingPolicy
    },
    contactPoints: contactPoints,
-   authProvider: new cassandra.auth.PlainTextAuthProvider('admin', 'q1w2e3r4'),
+   authProvider: new cassandra.auth.PlainTextAuthProvider('cassandra', 'cassandra'),
    keyspace:'co2'
 };
 const cassandraClient = new cassandra.Client(clientOptions);
@@ -27,20 +27,23 @@ const insertCo2Consumption = 'INSERT INTO co2consumptioncompaction(server, ts, v
 async function generateCo2() {
     
     const servers = await getServersListFromMongo();
+    console.log(servers);
     // For each server in the server list, generate a CO2 emission value and insert it
     // in the database.
-    servers.forEach(server => {
-        // Use server ID to INSERT value of CO2 and timestamp to corresponding servers
-        const serverId = server._id.toString();
-        console.log(serverId);
-        const co2Value = Math.random();
-        params = [serverId, new Date(), co2Value];
-        cassandraClient.execute(insertCo2Consumption, params, {prepare: true}, (err) => {
-            if(err) {
-                console.log(err);
-            }
+    if (servers.length > 0) {
+        servers.forEach(server => {
+            // Use server ID to INSERT value of CO2 and timestamp to corresponding servers
+            const serverId = server._id.toString();
+            console.log(serverId);
+            const co2Value = Math.random();
+            params = [serverId, new Date(), co2Value];
+            cassandraClient.execute(insertCo2Consumption, params, {prepare: true}, (err) => {
+                if(err) {
+                    console.log(err);
+                }
+            });
         });
-    });
+    }
 }
 
 async function getServersListFromMongo() {
@@ -55,6 +58,6 @@ async function getServersListFromMongo() {
     return servers;
 }
 
-setInterval(generateCo2, 1000);
+setInterval(generateCo2, 4000);
 
 app.listen(port, () => console.log(`Carbon dioxide sensor started on port ${port}`));

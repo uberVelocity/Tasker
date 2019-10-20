@@ -4,6 +4,9 @@ networks:
   isolation-network:
     driver: bridge
 
+volumes:
+  cassandra-volume:
+
 services:
   tasker:
     container_name: tasker
@@ -59,5 +62,33 @@ services:
       - isolation-network
     volumes:
       - cassandra-volume:/var/lib/cassandra
-volumes:
-  cassandra-volume:
+    expose:
+      - 7000
+      - 7001
+      - 7199
+      - 9042
+      - 9160
+
+  gw-sensor:
+    container_name: gw-sensor
+    restart: always
+    build: gw_sensor
+    ports:
+      - '3002:3002'
+    networks:
+      - isolation-network
+    links:
+      - mongo-node
+      - cassandra-cluster
+    
+  co2-sensor:
+    container_name: co2-sensor
+    restart: always
+    build: co2_sensor
+    ports:
+      - '3001:3001'
+    networks:
+      - isolation-network
+    links:
+      - mongo-node
+      - cassandra-cluster
