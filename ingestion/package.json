@@ -1,0 +1,11 @@
+{
+  "name": "ingestion",
+  "version": "1.0.0",
+  "description": "Ingestion service that takes data from different sensors and streams it through a message queue.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mihai Popescu",
+  "license": "MIT"
+}
