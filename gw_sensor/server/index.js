@@ -2,10 +2,12 @@ const express = require('express');
 const mongodb = require('mongodb');
 const dotenv = require('dotenv');
 
+const StreamService = require("../services/StreamService");
+
 const localDatacenter = 'datacenter1';
 const cassandra = require('cassandra-driver');
 const contactPoints = ['cassandra-cluster', 'cassandra-cluster', 'cassandra-cluster'];
-const loadBalancingPolicy = new cassandra.policies.loadBalancing.DCAwareRoundRobinPolicy(localDatacenter); 
+const loadBalancingPolicy = new cassandra.policies.loadBalancing.DCAwareRoundRobinPolicy(localDatacenter);
 const clientOptions = {
    policies : {
       loadBalancing : loadBalancingPolicy
@@ -59,6 +61,10 @@ async function getServersListFromMongo() {
     return servers;
 }
 
-setInterval(generateGw, 4000);
+// setInterval(generateGw, 4000);
+setInterval(async () => {
+    const response = await StreamService.streamData();
+    console.log(response.data.response);
+}, 1000);
 
 app.listen(port, () => console.log(`Gw sensor started on port ${port}`));

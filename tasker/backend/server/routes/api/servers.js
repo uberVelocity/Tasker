@@ -25,7 +25,6 @@ router.post('/', verify, async (req, res) => {
         location: req.body.serverData.location,
         createdAt: new Date()
     });
-    
     return res.status(201).send();
 });
 

@@ -88,3 +88,12 @@ services:
       - isolation-network
     depends_on:
       - cassandra-cluster
+
+  ingest:
+    container_name: ingest
+    restart: always
+    build: ingestion
+    ports:
+      - '4003:4003'
+    networks:
+      - isolation-network
