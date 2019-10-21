@@ -14,8 +14,6 @@ services:
     build: tasker/backend
     ports:
       - '5000:5000'
-    links: # links tasker to database
-      - mongo-node
     networks:
       - isolation-network
     
@@ -53,11 +51,11 @@ services:
       - '4001:4001'
     networks:
       - isolation-network
-  
+
   cassandra-cluster:
     container_name: cassandra-cluster
     restart: always
-    image: ce5334a7b86c
+    image: cassandra:3.0
     networks:
       - isolation-network
     volumes:
@@ -77,8 +75,7 @@ services:
       - '3002:3002'
     networks:
       - isolation-network
-    links:
-      - mongo-node
+    depends_on:
       - cassandra-cluster
     
   co2-sensor:
@@ -89,6 +86,5 @@ services:
       - '3001:3001'
     networks:
       - isolation-network
-    links:
-      - mongo-node
+    depends_on:
       - cassandra-cluster

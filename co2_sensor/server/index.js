@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 
 const localDatacenter = 'datacenter1';
 const cassandra = require('cassandra-driver');
-const contactPoints = ['172.17.0.1', '172.17.0.1', '172.17.0.1'];
+const contactPoints = ['cassandra-cluster', 'cassandra-cluster', 'cassandra-cluster'];
 const loadBalancingPolicy = new cassandra.policies.loadBalancing.DCAwareRoundRobinPolicy(localDatacenter); 
 const clientOptions = {
    policies : {
