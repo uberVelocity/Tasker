@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = '/api/servers/';
+const url = 'http://localhost:5000/api/servers/';
 
 class ServerService {
     // Get Servers
@@ -27,7 +27,7 @@ class ServerService {
     }
 
     static getAbout() {
-        return axios.post('/api/servers/pizza');
+        return axios.post(url + 'pizza');
     }
 
     // Create Posts

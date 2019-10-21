@@ -69,7 +69,13 @@ router.post("/login", async (req, res) => {
 
   // Create and assign a JSON Web Token (string should be replaced by .env variable)
   const token = jwt.sign({_id: user._id}, '124aww12423ad24124awdrtaeNADAIUASNFI@$h1247asd');
-  res.set('authorization', `${token}`).send();
+  console.log(`token: ${token}`);
+  // res.set('authorization', `${token}`).send();  // Normal way to send in header
+  
+  // send as JSON and get it from front-end
+  res.status(201).json({
+    authorization: token
+  }).send();
 });
 
 module.exports = router;

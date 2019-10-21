@@ -1,6 +1,7 @@
 <script>
 import { Bar } from "vue-chartjs";
 
+
 export default {
   name: 'BarComponent',
   extends: Bar,

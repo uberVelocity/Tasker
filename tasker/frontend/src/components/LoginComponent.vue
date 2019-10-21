@@ -37,17 +37,17 @@ export default {
         password: this.password
       });
       // Check for authorization header existance
-      if (res.headers["authorization"]) {
-        // Save the token in local storage and redirect
-        localStorage.setItem("authorization", res.headers["authorization"]);
-        this.$router.push("/servers");
+      // Save the token in local storage and redirect
+      console.log('setting authorization header');
+      const token = res.data.authorization;
+      if (token) {
+        localStorage.setItem("authorization", token);
       }
-      // Failed authentication
       else {
-        // Display reason for failed authentication
-        this.response = res.body;
+        this.response = 'Failed to login!'; 
       }
-    },
+      this.$router.push("/servers");
+      },
     goServers() {
       this.$router.push("/servers");
     },

@@ -4,7 +4,7 @@ const router = express.Router();
 
 const localDatacenter = 'datacenter1';
 const cassandra = require('cassandra-driver');
-const contactPoints = ['172.17.0.3', '172.17.0.3', '172.17.0.3'];
+const contactPoints = ['cassandra-cluster', 'cassandra-cluster', 'cassandra-cluster'];
 const loadBalancingPolicy = new cassandra.policies.loadBalancing.DCAwareRoundRobinPolicy(localDatacenter); 
 
 const clientOptionsGw = {
@@ -88,7 +88,7 @@ async function compileServerListWithHistory(requestType) {
 }
 
 async function getServersListFromMongo() {
-    const client = await mongodb.MongoClient.connect('mongodb://localhost:27017/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/tasker', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

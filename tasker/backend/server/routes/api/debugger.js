@@ -7,11 +7,11 @@ router.post('/log', (req, res) => {
     res.status(200).send();
 });
 
-router.get('/number', (req, res) => {
-    console.log('generating number');
-    res.status(200).json({
-        random: Math.random()
-    }).send();
-});
+// router.get('/number', (req, res) => {
+//     console.log('generating number');
+//     res.status(200).json({
+//         random: Math.random()
+//     }).send();
+// });
 
 module.exports = router;

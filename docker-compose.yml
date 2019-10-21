@@ -1,4 +1,12 @@
 version: '3'
+
+networks:
+  isolation-network:
+    driver: bridge
+
+volumes:
+  cassandra-volume:
+
 services:
   tasker:
     container_name: tasker
@@ -6,24 +14,77 @@ services:
     build: tasker/backend
     ports:
       - '5000:5000'
-    links: # links tasker to database
-      - mongo-node
+    networks:
+      - isolation-network
+    
   mongo-node:
     container_name: mongo-node
     image: mongo:4.0.4
     ports:
       - '27017:27017'
+    networks:
+      - isolation-network
+
   front-end:
     container_name: front-end
     restart: always
     build: tasker/frontend
     ports:
       - '80:80'
-    links:
-      - tasker
+    networks:
+      - isolation-network
+
   history-retriever:
     container_name: history
     restart: always
     build: history_retriever
     ports:
+      - '4002:4002'
+    networks:
+      - isolation-network
+
+  chat:
+    container_name: chat
+    restart: always
+    build: chat
+    ports:
       - '4001:4001'
+    networks:
+      - isolation-network
+
+  cassandra-cluster:
+    container_name: cassandra-cluster
+    restart: always
+    image: cassandra:3.0
+    networks:
+      - isolation-network
+    volumes:
+      - cassandra-volume:/var/lib/cassandra
+    expose:
+      - 7000
+      - 7001
+      - 7199
+      - 9042
+      - 9160
+
+  gw-sensor:
+    container_name: gw-sensor
+    restart: always
+    build: gw_sensor
+    ports:
+      - '3002:3002'
+    networks:
+      - isolation-network
+    depends_on:
+      - cassandra-cluster
+    
+  co2-sensor:
+    container_name: co2-sensor
+    restart: always
+    build: co2_sensor
+    ports:
+      - '3001:3001'
+    networks:
+      - isolation-network
+    depends_on:
+      - cassandra-cluster

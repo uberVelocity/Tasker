@@ -4,7 +4,6 @@
       <button class="waves-effect waves-light btn" @click="goAbout">About</button>
       <button class="waves-effect waves-light btn" @click="goServers">Servers</button>
       <button class="waves-effect waves-light btn" @click="goUser">User dashboard</button>
-      <h1 style="color: black"> NUMBER: {{debugNumber}} </h1>
         <ul class="right">
           <li>
             <input type="text" placeholder="Username" required v-model="email"/>
@@ -34,26 +33,16 @@
 </template>
 
 <script>
-import io from "socket.io-client";
 import AuthenticationService from '../services/AuthenticationService';
-import DebuggerService from '../services/DebuggerService'
 
 export default {
   name: "HomeComponent",
   data() {
     return {
-      isConnected: "false",
-      socket: io("localhost:4001"),
       email: '',
       password: '',
       debugNumber: 0
     }
-  },
-  created() {
-    setInterval(async () => {
-      const response = await DebuggerService.serveNumber();
-      this.debugNumber = response.data.random;
-    }, 1000);
   },
   methods: {
     goAbout() {
@@ -93,13 +82,6 @@ export default {
     },
     goRegister() {
       this.$router.push("/register")
-    },
-    getHistory(e) {
-      e.preventDefault();
-
-      this.socket.emit("HELLO_MESSAGE", {
-        message: "hello"
-      });
     }
   }
 };
