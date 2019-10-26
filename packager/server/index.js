@@ -20,9 +20,11 @@ const app = express();
 
 dotenv.config();
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 4004;
 
 const insertCo2Consumption = 'INSERT INTO co2consumptioncompaction(server, ts, value) VALUES(?, ?, ?)';
+const insertGwConsumption = 'INSERT INTO gwconsumptioncompaction(server, ts, value) VALUES(?, ?, ?)';
+
 // Inserts at every second the value of each server into the database
 async function generateCo2() {
     
@@ -46,6 +48,8 @@ async function generateCo2() {
     }
 }
 
+
+
 async function getServersListFromMongo() {
     const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/admin', {
         useNewUrlParser: true,
@@ -58,6 +62,6 @@ async function getServersListFromMongo() {
     return servers;
 }
 
-setInterval(generateCo2, 4000);
+// setInterval(generateCo2, 4000);
 
 app.listen(port, () => console.log(`Carbon dioxide sensor started on port ${port}`));

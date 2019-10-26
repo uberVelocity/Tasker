@@ -28,7 +28,7 @@ function pingHosts() {
     });    
 }
 
-setInterval(pingHosts, 60000);
+// setInterval(pingHosts, 60000);
 
 app.listen(port, () => console.log(`History retriever operational on port ${port}`));
 

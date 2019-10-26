@@ -14,7 +14,7 @@ const clientOptions = {
    },
    contactPoints: contactPoints,
    authProvider: new cassandra.auth.PlainTextAuthProvider('cassandra', 'cassandra'),
-   keyspace:'gw'
+   keyspace:'tasker'
 };
 const cassandraClient = new cassandra.Client(clientOptions);
 
@@ -29,7 +29,6 @@ const insertGwConsumption = 'INSERT INTO gwconsumptioncompaction(server, ts, val
 async function generateGw() {
 
     const servers = await getServersListFromMongo();
-    console.log(servers);
 
     if (servers.length > 0) {
         // For each server in the server list, generate a gw consumption value and insert it
@@ -50,21 +49,23 @@ async function generateGw() {
 }
 
 async function getServersListFromMongo() {
-    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/admin', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }
     );
+    
 
     const connection = client.db('tasker').collection('servers');
     const servers = await connection.find({}).toArray();
+    
     return servers;
 }
 
-// setInterval(generateGw, 4000);
-setInterval(async () => {
-    const response = await StreamService.streamData();
-    console.log(response.data.response);
-}, 1000);
+setInterval(generateGw, 4000);
+// setInterval(async () => {
+//     const response = await StreamService.streamData();
+//     console.log(response.data.response);
+// }, 1000);
 
 app.listen(port, () => console.log(`Gw sensor started on port ${port}`));

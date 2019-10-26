@@ -16,6 +16,8 @@ services:
       - '5000:5000'
     networks:
       - isolation-network
+    depends_on:
+      - mongo-node
     
   mongo-node:
     container_name: mongo-node
@@ -95,5 +97,15 @@ services:
     build: ingestion
     ports:
       - '4003:4003'
+    networks:
+      - isolation-network
+  
+  rabbit:
+    container_name: rabbit
+    restart: always
+    image: rabbitmq:3
+    hostname: rabbit
+    ports:
+      - '5672:5672'
     networks:
       - isolation-network

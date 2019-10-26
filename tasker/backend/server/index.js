@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to DB
-mongoose.connect('mongodb://mongo-node:27017/tasker', {
+mongoose.connect('mongodb://mongo-node:27017/admin', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => console.log('MongoDB Connected'));

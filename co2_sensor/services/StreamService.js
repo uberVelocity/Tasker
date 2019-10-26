@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const url = 'http://ingest:4003/api/ingest/gw';
+const url = 'http://ingest:4003/api/ingest/co2';
 
 module.exports = class StreamService {
 

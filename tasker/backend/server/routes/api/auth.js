@@ -16,6 +16,7 @@ router.post("/register", async (req, res) => {
     console.log(error);
     return res.status(400).send(error.details[0].message);
   }
+  console.log('no error');
 
   // Check if user already in db
   const emailExists = await User.findOne({ email: req.body.email });
@@ -23,19 +24,23 @@ router.post("/register", async (req, res) => {
     console.log('email already exists');
     return res.status(400).send("Email already exists");
   }
+  console.log('email does not exist');
 
   // Hash the password!
   const salt = await bcrypt.genSalt(10);
+  console.log('generated salt');
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
+  console.log('hashed password');
   // Create a new user
   const user = new User({
     name: req.body.name,
     email: req.body.email,
     password: hashedPassword
   });
+  console.log(`created user ${user}`);
   try {
     const savedUser = await user.save();
+    console.log('saved user and sent it');
     res.send({ user: user._id });
   } catch (err) {
     res.status(400).send(err);
