@@ -88,7 +88,7 @@ async function compileServerListWithHistory(requestType) {
 }
 
 async function getServersListFromMongo() {
-    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/admin', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }
