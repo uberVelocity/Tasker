@@ -2,6 +2,8 @@ const express = require('express');
 const mongodb = require('mongodb');
 const dotenv = require('dotenv');
 
+const PackageService = require('../services/PackageService');
+
 const localDatacenter = 'datacenter1';
 const cassandra = require('cassandra-driver');
 const contactPoints = ['cassandra-cluster', 'cassandra-cluster', 'cassandra-cluster'];
@@ -59,11 +61,14 @@ async function getServersListFromMongo() {
     }
     );
 
-    const connection = client.db('tasker').collection('servers');
+    const connection = client.db('admin').collection('servers');
     const servers = await connection.find({}).toArray();
     return servers;
 }
 
-// setInterval(generateCo2, 4000);
+setTimeout(PackageService.getDataCo2, 25000);
+
+// setInterval(PackageService.getDataCo2, 5000);
+// setInterval(PackageService.getDataGw, 5000);
 
 app.listen(port, () => console.log(`Packager service started on port ${port}`));
