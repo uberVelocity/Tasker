@@ -43,7 +43,7 @@ async function getServersListFromMongo() {
     return servers;
 }
 
-// setInterval(generateGw, 4000);
+setInterval(generateGw, 4000);
 // setInterval(async () => {
 //     const response = await StreamService.streamData();
 //     console.log(response.data.response);

@@ -66,9 +66,10 @@ async function getServersListFromMongo() {
     return servers;
 }
 
-setTimeout(PackageService.getDataCo2, 25000);
+// setTimeout(PackageService.getDataCo2, 25000);
+// setTimeout(PackageService.getDataGw, 25000);
 
-// setInterval(PackageService.getDataCo2, 5000);
-// setInterval(PackageService.getDataGw, 5000);
+setInterval(PackageService.getDataCo2, 5000);
+setInterval(PackageService.getDataGw, 5000);
 
 app.listen(port, () => console.log(`Packager service started on port ${port}`));

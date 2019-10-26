@@ -20,8 +20,7 @@ module.exports = class PackageService {
         console.log(" [*] Waiting for messages in %s.", queue);
 
         channel.consume(queue, function(msg) {
-          const data = msg.content;
-          console.log(`GW received: ${data}`);        
+          console.log(`GW received: ${msg.content}`);        
         }, {
             noAck: true
         });
@@ -49,7 +48,7 @@ module.exports = class PackageService {
         console.log(" [*] Waiting for messages in %s.", queue);
 
         channel.consume(queue, function(msg) {
-            console.log(`co2: ${msg.content}`);
+            console.log(`CO2 received: ${msg.content}`);
         }, {
             noAck: true
         });

@@ -8,6 +8,7 @@ const StreamService = require("../../Services/StreamService");
 router.post('/gw', async (req, res) => {
     console.log(`Gw data:${req.body.data}`);
     const gwConsumption = req.body.data;
+    
     StreamService.streamGw(gwConsumption);
     res.status(201).send();
 
