@@ -12,7 +12,6 @@ const port = process.env.PORT || 3001;
 
 // Inserts at every second the value of each server into the database
 async function generateCo2() {
-    console.log('generating co2');
     
     const servers = await getServersListFromMongo();
     // console.log(servers);

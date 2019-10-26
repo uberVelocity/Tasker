@@ -6,7 +6,7 @@ WORKDIR backend
 # Install app dependencies
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --verbose
 
 # Bundle app source
 COPY . .

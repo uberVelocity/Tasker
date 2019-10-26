@@ -8,6 +8,7 @@ const StreamService = require("../../Services/StreamService");
 router.post('/gw', async (req, res) => {
     console.log(`Gw data:${req.body.data}`);
     const gwConsumption = req.body.data;
+    
     StreamService.streamGw(gwConsumption);
     res.status(201).send();
 
@@ -15,7 +16,7 @@ router.post('/gw', async (req, res) => {
 
 // Handling co2 emissions
 router.post('/co2', async (req, res) => {
-    console.log(`Gw data:${req.body.data}`);
+    console.log(`co2 data:${req.body.data}`);
     const co2Consumption = req.body.data;
 
     await StreamService.streamCo2(co2Consumption);
