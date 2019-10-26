@@ -25,7 +25,6 @@ router.post('/', verify, async (req, res) => {
         location: req.body.serverData.location,
         createdAt: new Date()
     });
-    
     return res.status(201).send();
 });
 
@@ -38,13 +37,13 @@ router.delete('/:id', verify, async (req, res) => {
 
 // Connect to servers collection
 async function loadServersCollection() {
-    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/tasker', {
+    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/admin', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }
     );
 
-    return client.db('tasker').collection('servers');
+    return client.db('admin').collection('servers');
 }
 
 module.exports = router;

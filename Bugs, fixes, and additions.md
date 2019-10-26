@@ -16,31 +16,20 @@
 ## Database(s)
 
 - Replicate MongoDB database - **TO BE DONE TODAY** (also in docker)
-- Dockerize CassandraDB database
+- Dockerize CassandraDB database - Done
 - Replicate CassandraDB database
 - Store tasks per user in database
+- 
 
 ## Scalability and fault tolerance
 
-- Connect frontend with backend in docker
+- Connect frontend with backend in docker - Done (but without reverse proxy)
+- Attempt to reconnect to database if connection drops
+- Serve app on Kubernetes
 - Create replicas of every component in an orchestrator (Docker swarm or Kubernetes) 
-- Deploy application on Google Cloud
+- Deploy application on AWS
 
 ## Done :)
-
-
-
-
-
-# 
-
-
-
-
-
-
-
-
 
 
 

@@ -1,0 +1,19 @@
+{
+  "name": "packager",
+  "version": "1.0.0",
+  "description": "Inserts measurements into cassandra-cluster from message queue.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mihai Popescu",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "cassandra-driver": "^4.3.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.3"
+  }
+}
