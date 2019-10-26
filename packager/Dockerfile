@@ -1,7 +1,7 @@
 FROM node:10
 
 # Create app directory
-WORKDIR co2_sensor
+WORKDIR packager
 
 # Install app dependencies
 COPY package*.json ./

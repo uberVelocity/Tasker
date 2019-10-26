@@ -78,7 +78,7 @@ services:
     networks:
       - isolation-network
     depends_on:
-      - cassandra-cluster
+      - mongo-node
     
   co2-sensor:
     container_name: co2-sensor
@@ -89,7 +89,7 @@ services:
     networks:
       - isolation-network
     depends_on:
-      - cassandra-cluster
+      - mongo-node
 
   ingest:
     container_name: ingest
@@ -109,3 +109,14 @@ services:
       - '5672:5672'
     networks:
       - isolation-network
+  
+  packager:
+    container_name: packager
+    restart: always
+    build: packager
+    ports:
+      - '4004:4004'
+    networks:
+      - isolation-network
+    depends_on:
+      - mongo-node

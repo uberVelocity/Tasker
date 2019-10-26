@@ -2,19 +2,7 @@ const express = require('express');
 const mongodb = require('mongodb');
 const dotenv = require('dotenv');
 
-const localDatacenter = 'datacenter1';
-const cassandra = require('cassandra-driver');
-const contactPoints = ['cassandra-cluster', 'cassandra-cluster', 'cassandra-cluster'];
-const loadBalancingPolicy = new cassandra.policies.loadBalancing.DCAwareRoundRobinPolicy(localDatacenter); 
-const clientOptions = {
-   policies : {
-      loadBalancing : loadBalancingPolicy
-   },
-   contactPoints: contactPoints,
-   authProvider: new cassandra.auth.PlainTextAuthProvider('cassandra', 'cassandra'),
-   keyspace:'tasker'
-};
-const cassandraClient = new cassandra.Client(clientOptions);
+const StreamService = require("../services/StreamService");
 
 const app = express();
 
@@ -22,9 +10,9 @@ dotenv.config();
 
 const port = process.env.PORT || 3001;
 
-const insertCo2Consumption = 'INSERT INTO co2consumptioncompaction(server, ts, value) VALUES(?, ?, ?)';
 // Inserts at every second the value of each server into the database
 async function generateCo2() {
+    console.log('generating co2');
     
     const servers = await getServersListFromMongo();
     // console.log(servers);
@@ -37,15 +25,12 @@ async function generateCo2() {
             console.log(serverId);
             const co2Value = Math.random();
             params = [serverId, new Date(), co2Value];
-            cassandraClient.execute(insertCo2Consumption, params, {prepare: true}, (err) => {
-                if(err) {
-                    console.log(err);
-                }
-            });
+            StreamService.streamData(params);
         });
     }
 }
 
+// Emulates the sensors onto which they are attached (pretend it is not a database, but a machine that the sensor is attached to)
 async function getServersListFromMongo() {
     const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/admin', {
         useNewUrlParser: true,
@@ -53,7 +38,7 @@ async function getServersListFromMongo() {
     }
     );
 
-    const connection = client.db('tasker').collection('servers');
+    const connection = client.db('admin').collection('servers');
     const servers = await connection.find({}).toArray();
     return servers;
 }

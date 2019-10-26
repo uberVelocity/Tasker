@@ -43,7 +43,7 @@ async function loadServersCollection() {
     }
     );
 
-    return client.db('tasker').collection('servers');
+    return client.db('admin').collection('servers');
 }
 
 module.exports = router;

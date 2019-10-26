@@ -4,27 +4,12 @@ const dotenv = require('dotenv');
 
 const StreamService = require("../services/StreamService");
 
-const localDatacenter = 'datacenter1';
-const cassandra = require('cassandra-driver');
-const contactPoints = ['cassandra-cluster', 'cassandra-cluster', 'cassandra-cluster'];
-const loadBalancingPolicy = new cassandra.policies.loadBalancing.DCAwareRoundRobinPolicy(localDatacenter);
-const clientOptions = {
-   policies : {
-      loadBalancing : loadBalancingPolicy
-   },
-   contactPoints: contactPoints,
-   authProvider: new cassandra.auth.PlainTextAuthProvider('cassandra', 'cassandra'),
-   keyspace:'tasker'
-};
-const cassandraClient = new cassandra.Client(clientOptions);
-
 const app = express();
 
 dotenv.config();
 
 const port = process.env.PORT || 3002;
 
-const insertGwConsumption = 'INSERT INTO gwconsumptioncompaction(server, ts, value) VALUES(?, ?, ?)';
 // Inserts at every second the value of each server into the database
 async function generateGw() {
 
@@ -39,11 +24,7 @@ async function generateGw() {
             console.log(serverId);
             const gwValue = Math.random();
             params = [serverId, new Date(), gwValue];
-            cassandraClient.execute(insertGwConsumption, params, {prepare: true}, (err) => {
-                if(err) {
-                    console.log(err);
-                }
-            });
+            StreamService.streamData(params);
         });
     }
 }
@@ -56,7 +37,7 @@ async function getServersListFromMongo() {
     );
     
 
-    const connection = client.db('tasker').collection('servers');
+    const connection = client.db('admin').collection('servers');
     const servers = await connection.find({}).toArray();
     
     return servers;
