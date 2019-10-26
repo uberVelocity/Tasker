@@ -18,15 +18,14 @@ module.exports = class StreamService {
                     throw error1;
                 }
                 const queue = 'gw';
-                const msg = data;
-                
+
                 // Create queue if it does not exist yet
                 channel.assertQueue(queue, {
                     durable: false
                 });
 
                 // Send data gw data to queue
-                channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg)));
+                channel.sendToQueue(queue, Buffer.from(msg));
                 console.log('Data sent to RabbitMQ!');
              });
         });
@@ -48,8 +47,9 @@ module.exports = class StreamService {
                     throw error1;
                 }
                 const queue = 'co2';
-                const msg = data;
-                
+                const msg = JSON.stringify(data);
+                console.log(`STREAM SERVICE: ${msg}`);
+                                
                 // Create queue if it does not exist yet
                 channel.assertQueue(queue, {
                     durable: false
