@@ -1,5 +1,4 @@
 const express = require('express');
-const mongodb = require('mongodb');
 const router = express.Router();
 
 const localDatacenter = 'datacenter1';
@@ -13,7 +12,7 @@ const clientOptionsGw = {
    },
    contactPoints: contactPoints,
    authProvider: new cassandra.auth.PlainTextAuthProvider('admin', 'q1w2e3r4'),
-   keyspace:'gw'
+   keyspace:'tasker'
 };
 
 const clientOptionsCo2 = {
@@ -22,28 +21,37 @@ const clientOptionsCo2 = {
      },
      contactPoints: contactPoints,
      authProvider: new cassandra.auth.PlainTextAuthProvider('admin', 'q1w2e3r4'),
-     keyspace:'co2'
+     keyspace:'tasker'
 };
 
 const getAllPowerConsumption = 'SELECT value, ts FROM gwconsumptioncompaction WHERE server=?';
 const getAllCo2Emissions = 'SELECT value, ts FROM co2consumptioncompaction WHERE server=?';
 
 // Get history of GW
-router.get('/gw', async (req, res) => {
-    const gwHistory = await compileServerListWithHistory('power');
+router.post('/gw', async (req, res) => {
+    console.log('hit GW');
+    const serverId = req.body.serverId;
+    console.log(`serverId body from function co2: ${serverId}`);
+    const gwHistory = await compileServerListWithHistory('power', req.body.serverId);
+    console.log(`gw: ${gwHistory}`);
     res.status(200).send(gwHistory);
 });
 
 // Get history of CO2 emissions
-router.get('/co2', async (req, res) => {
-    const co2History = await compileServerListWithHistory('co2');
+router.post('/co2', async (req, res) => {
+    console.log('hit co2');
+    const serverId = req.body.serverId;
+    console.log(`serverId body from function gw: ${serverId}`);
+    const co2History = await compileServerListWithHistory('co2', req.body.serverId);
+    console.log(`co2: ${co2History}`);
     res.status(200).send(co2History);
 });
 
 // Compiles and returns a list of values of a certain property (either CO2 or GW)
 // with timestamps from Cassandra FOR ALL SERVERS THAT ARE CURRENTLY IN MONGO (so not ones that have values)
 // but have been removed from the database
-async function compileServerListWithHistory(requestType) {
+async function compileServerListWithHistory(requestType, serverId) {
+    console.log(`serverId in CompileServerList: ${serverId}`);
     if (requestType === 'power') {
         cassandraClient = new cassandra.Client(clientOptionsGw);
         requestType = getAllPowerConsumption;
@@ -55,48 +63,36 @@ async function compileServerListWithHistory(requestType) {
     else {
         return 'err';
     }
-    let nthServer = 0;
-    let compiledList = [];
-    const servers = await getServersListFromMongo();
-    for (mongoServer of servers) {
-        params = [mongoServer._id.toString()];
-        await new Promise((resolve, reject) => {
-            cassandraClient.execute(requestType, params, (result, err) => {
-                if(err) {
-                    reject(err);
-                }
-                let newServer = {
-                    server: mongoServer._id.toString(),
-                    values: [],
-                    valuesTs: []
-                }
-                for (i = 0; i < err.rows.length; i ++) {
-                    newServer.values.push(err.rows[i].value);
-                    newServer.valuesTs.push(err.rows[i].ts);
-                }
-                compiledList.push(newServer);
-                nthServer += 1;
-                console.log(compiledList[0]);
-                resolve()
-            })
-        }).then(
-            response => {},
-            reason => {}
-        );
+    const data = {
+        timeStamps: [],
+        values: []
     }
-    return compiledList;
-}
-
-async function getServersListFromMongo() {
-    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/admin', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }
+    params = [serverId.toString()];
+    await new Promise((resolve, reject) => {
+        cassandraClient.execute(requestType, params, (result, err) => {
+            if(err) {
+                reject(err);
+            }
+            let newServer = {
+                server: serverId.toString(),
+                values: [],
+                valuesTs: []
+            }
+            for (i = 0; i < err.rows.length; i ++) {
+                newServer.values.push(err.rows[i].value);
+                newServer.valuesTs.push(err.rows[i].ts);
+            }
+            data.values = newServer.values;
+            data.timeStamps = newServer.valuesTs;
+            resolve();
+        })
+    }).then(
+        response => {},
+        reason => {}
     );
+    console.log(`data: ${data}`);
 
-    const connection = client.db('tasker').collection('servers');
-    const servers = await connection.find({}).toArray();
-    return servers;
+    return data;
 }
 
 module.exports = router;
