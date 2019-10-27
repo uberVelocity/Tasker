@@ -11,7 +11,7 @@ services:
   tasker:
     container_name: tasker
     restart: always # if it fails, it attempts to restart the node
-    build: tasker/backend
+    image: ubervelocity/tasker:1.0
     ports:
       - '5000:5000'
     networks:
@@ -30,7 +30,7 @@ services:
   front-end:
     container_name: front-end
     restart: always
-    build: tasker/frontend
+    image: ubervelocity/front-end:1.0
     ports:
       - '80:80'
     networks:
@@ -39,7 +39,7 @@ services:
   history-retriever:
     container_name: history
     restart: always
-    build: history_retriever
+    image: ubervelocity/history:1.0
     ports:
       - '4002:4002'
     networks:
@@ -48,7 +48,7 @@ services:
   chat:
     container_name: chat
     restart: always
-    build: chat
+    image: ubervelocity/chat:1.0
     ports:
       - '4001:4001'
     networks:
@@ -72,7 +72,7 @@ services:
   gw-sensor:
     container_name: gw-sensor
     restart: always
-    build: gw_sensor
+    image: ubervelocity/gw:1.0
     ports:
       - '3002:3002'
     networks:
@@ -83,7 +83,7 @@ services:
   co2-sensor:
     container_name: co2-sensor
     restart: always
-    build: co2_sensor
+    image: ubervelocity/co2:1.0
     ports:
       - '3001:3001'
     networks:
@@ -94,7 +94,7 @@ services:
   ingest:
     container_name: ingest
     restart: always
-    build: ingestion
+    image: ubervelocity/ingest:1.0
     ports:
       - '4003:4003'
     networks:
@@ -113,7 +113,7 @@ services:
   packager:
     container_name: packager
     restart: always
-    build: packager
+    image: ubervelocity/packager:1.0
     ports:
       - '4004:4004'
     networks:
