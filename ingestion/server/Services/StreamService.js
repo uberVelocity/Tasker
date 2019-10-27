@@ -3,9 +3,7 @@ const rabbit = require('amqplib/callback_api');
 
 module.exports = class StreamService {
 
-    static async streamGw(data) {
-        console.log(`gw data: ${data}`);
-        
+    static async streamGw(data) {        
         // Send the data to rabbitMQ
         rabbit.connect('amqp://rabbit', function(error0, connection) {
              if (error0) {
@@ -27,14 +25,13 @@ module.exports = class StreamService {
 
                 // Send data gw data to queue
                 channel.sendToQueue(queue, Buffer.from(msg));
-                console.log('Data sent to RabbitMQ from gw!');
+                console.log(`Data sent to RabbitMQ gw: ${msg}`);
              });
         });
 
     }
 
     static async streamCo2(data) {
-        console.log(`co2 data: ${data}`);
         
         // Send the data to rabbitMQ
         rabbit.connect('amqp://rabbit', function(error0, connection) {
@@ -57,7 +54,7 @@ module.exports = class StreamService {
 
                 // Send data co2 data to queue
                 channel.sendToQueue(queue, Buffer.from(msg));
-                console.log('Data sent to RabbitMQ co2!');
+                console.log(`Data sent to RabbitMQ co2: ${msg}`);
              });
         });
     }
