@@ -11,6 +11,7 @@ import StatusComponent from './components/StatusComponent';
 import BarComponent from './components/charts/BarComponent';
 import UserComponent from './components/UserComponent';
 import ChatComponent from './components/ChatComponent';
+import TestingComponent from './components/TestingComponent';
 
 
 Vue.config.productionTip = false;
@@ -62,6 +63,11 @@ const routes = [
     path: '/chat',
     name: 'Chat',
     component: ChatComponent
+  },
+  {
+    path: '/testing',
+    name: 'Testing',
+    component: TestingComponent
   }
 ];
 
