@@ -4,6 +4,7 @@
       <button class="waves-effect waves-light btn" @click="goAbout">About</button>
       <button class="waves-effect waves-light btn" @click="goServers">Servers</button>
       <button class="waves-effect waves-light btn" @click="goUser">User dashboard</button>
+      <button class="waves-effect waves-light btn" @click="goTesting">Testing page</button>
         <ul class="right">
           <li>
             <input type="text" placeholder="Username" required v-model="email"/>
@@ -78,10 +79,13 @@ export default {
       }
     },
     goLogin() {
-      this.$router.push("/login")
+      this.$router.push("/login");
     },
     goRegister() {
-      this.$router.push("/register")
+      this.$router.push("/register");
+    },
+    goTesting() {
+      this.$router.push("/testing");
     }
   }
 };
