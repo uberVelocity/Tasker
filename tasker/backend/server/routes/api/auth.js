@@ -12,9 +12,12 @@ router.post("/register", async (req, res) => {
 
   // Validate data before making user
   const { error } = await registerValidation(req.body);
+
   if (error) {
-    console.log(error);
-    return res.status(400).send(error.details[0].message);
+    console.log('Attempting to return the error message');
+      return res.json({
+        err: error.details[0].message
+      }).send();
   }
   console.log('no error');
 
@@ -55,21 +58,27 @@ router.post("/login", async (req, res) => {
   const { error } = await loginValidation(req.body);
   if (error) {
     console.log('error with the form');
-    return res.status(400).send(error.details[0].message);
+    return res.json({
+      err: error.details[0].message
+    }).send();
   }
 
   // Check if email exists
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     console.log('invalid email');
-    return res.status(400).send('invalid email');
+    return res.json({
+      err: 'invalid email'
+    }).send();
   }
 
   // Check if password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) {
     console.log('invalid password');
-    return res.status(400).send('invalid email');
+    return res.json({
+      err: 'invalid password'
+    }).send();
   }
 
   // Create and assign a JSON Web Token (string should be replaced by .env variable)

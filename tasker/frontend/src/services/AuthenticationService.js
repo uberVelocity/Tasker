@@ -5,11 +5,13 @@ const url = 'http://www.minikube.info/api/user/';
 
 class AuthenticationService {
     static async register(credentials) {
+
         const response = await axios.post(url + 'register', {
             name: credentials.name,
             email: credentials.email,
             password: credentials.password
         });
+
         return response;
     }
 
@@ -18,7 +20,6 @@ class AuthenticationService {
             email: credentials.email,
             password: credentials.password
         });
-        await DebuggerService.sendMessage(response);
         return response;
     }
 }
