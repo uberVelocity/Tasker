@@ -120,3 +120,4 @@ services:
       - isolation-network
     depends_on:
       - mongo-node
+      - cassandra-cluster
