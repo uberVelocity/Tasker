@@ -44,9 +44,6 @@ async function getServersListFromMongo() {
 }
 
 setInterval(generateGw, 4000);
-// setInterval(async () => {
-//     const response = await StreamService.streamData();
-//     console.log(response.data.response);
-// }, 1000);
+
 
 app.listen(port, () => console.log(`Gw sensor started on port ${port}`));
