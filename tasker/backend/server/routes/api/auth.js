@@ -14,7 +14,6 @@ router.post("/register", async (req, res) => {
   const { error } = await registerValidation(req.body);
 
   if (error) {
-    console.log('Attempting to return the error message');
       return res.json({
         err: error.details[0].message
       }).send();
@@ -47,6 +46,7 @@ router.post("/register", async (req, res) => {
 
 // Login
 router.post("/login", async (req, res) => {
+  console.log('attempting to log in user');
 
   // Validate user
   const { error } = await loginValidation(req.body);

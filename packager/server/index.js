@@ -23,7 +23,7 @@ async function getServersListFromMongo() {
 }
 
 
-// Checks and consume queues every five seconds
+// Checks and consumes queues every five seconds
 setInterval(PackageService.consumeAndInsertCo2, 5000);
 setInterval(PackageService.consumeAndInsertGw, 5000);
 

@@ -17,10 +17,6 @@ const connections = [];
 io.sockets.on('connection', (socket) => {
     connections.push(socket);
     console.log(`a user has connected: ${connections.length} connected`);
-    
-    socket.on('HELLO_MESSAGE', (data) => {
-        console.log('received hello message from the front-end with message: ' + data.message);
-    });
 
     socket.on('disconnect', (data) => {
         connections.splice(connections.indexOf(socket, 1));
