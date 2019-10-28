@@ -26,10 +26,6 @@ class ServerService {
         });
     }
 
-    static getAbout() {
-        return axios.post(url + 'pizza');
-    }
-
     // Create Posts
     static insertServer(serverData, token) {
         const config = {
