@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingestion-deployment
+  namespace: default
+  labels:
+    app: back-end
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ingestion
+  template:
+    metadata:
+      labels:
+        app: ingestion
+    spec:
+      containers:
+      - name: ingestion
+        image: s3249212/ingestion:latest
+        ports:
+          - containerPort: 4003

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: packager-deployment
+  namespace: default
+  labels:
+    app: packager
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: packager
+  template:
+    metadata:
+      labels:
+        app: packager
+    spec:
+      containers:
+      - name: packager
+        image: s3249212/packager:latest
+        ports:
+          - containerPort: 4004

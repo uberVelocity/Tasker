@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: co2-sensor-deployment
+  namespace: default
+  labels:
+    app: co2-sensor
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: co2-sensor
+  template:
+    metadata:
+      labels:
+        app: co2-sensor
+    spec:
+      containers:
+      - name: co2-sensor
+        image: s3249212/co2-sensor:latest
+        ports:
+          - containerPort: 3001

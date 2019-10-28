@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: tasker-ingress
   namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
   - host: minikube.info
@@ -13,12 +15,12 @@ spec:
           # matches with Service metadata.name
           serviceName: chat-service
           servicePort: 4001
-      - path: /api
+      - path: /api/(.*)
         backend:
           # matches with Service metadata.name
           serviceName: back-end-service
           servicePort: 5000
-      - path: /
+      - path: /(.*)
         backend:
           # matches with Service metadata.name
           serviceName: front-end-service
@@ -31,12 +33,12 @@ spec:
           # matches with Service metadata.name
           serviceName: chat-service
           servicePort: 4001
-      - path: /api
+      - path: /api/(.*)
         backend:
           # matches with Service metadata.name
           serviceName: back-end-service
           servicePort: 5000
-      - path: /
+      - path: /(.*)
         backend:
           # matches with Service metadata.name
           serviceName: front-end-service

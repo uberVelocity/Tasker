@@ -11,7 +11,7 @@ dotenv.config();
 const port = process.env.PORT || 4004;
 
 async function getServersListFromMongo() {
-    const client = await mongodb.MongoClient.connect('mongodb://mongo-node:27017/admin', {
+    const client = await mongodb.MongoClient.connect('mongodb://mongo-service:27017/admin', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

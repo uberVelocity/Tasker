@@ -2,7 +2,7 @@ const rabbit = require("amqplib/callback_api");
 
 const localDatacenter = 'datacenter1';
 const cassandra = require('cassandra-driver');
-const contactPoints = ['cassandra-cluster', 'cassandra-cluster', 'cassandra-cluster'];
+const contactPoints = ['cassandra-0', 'cassandra-1', 'cassandra-2'];
 const loadBalancingPolicy = new cassandra.policies.loadBalancing.DCAwareRoundRobinPolicy(localDatacenter); 
 const clientOptions = {
    policies : {

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gw-sensor-deployment
+  namespace: default
+  labels:
+    app: gw-sensor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gw-sensor
+  template:
+    metadata:
+      labels:
+        app: gw-sensor
+    spec:
+      containers:
+      - name: gw-sensor
+        image: s3249212/gw-sensor:latest
+        ports:
+          - containerPort: 3002

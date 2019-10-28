@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: history-retriever-deployment
+  namespace: default
+  labels:
+    app: history-retriever
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: history-retriever
+  template:
+    metadata:
+      labels:
+        app: history-retriever
+    spec:
+      containers:
+      - name: history-retriever
+        image: s3249212/history-retriever:latest
+        ports:
+          - containerPort: 4002
