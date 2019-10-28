@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/api/debugger/';
+const url = 'http://www.minikube.info/api/debugger/';
 
 class DebuggerService {
     static async sendMessage(message) {
