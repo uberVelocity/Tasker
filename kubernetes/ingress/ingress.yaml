@@ -8,6 +8,11 @@ spec:
   - host: minikube.info
     http:
       paths:
+      - path: /api/chat
+        backend:
+          # matches with Service metadata.name
+          serviceName: chat-service
+          servicePort: 4001
       - path: /api
         backend:
           # matches with Service metadata.name
@@ -21,6 +26,11 @@ spec:
   - host: www.minikube.info
     http:
       paths:
+      - path: /api/chat
+        backend:
+          # matches with Service metadata.name
+          serviceName: chat-service
+          servicePort: 4001
       - path: /api
         backend:
           # matches with Service metadata.name

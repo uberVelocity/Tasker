@@ -37,7 +37,7 @@ router.delete('/:id', verify, async (req, res) => {
 
 // Connect to servers collection
 async function loadServersCollection() {
-    const client = await mongodb.MongoClient.connect('mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/admin', {
+    const client = await mongodb.MongoClient.connect('mongodb://mongo-service:27017/admin', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

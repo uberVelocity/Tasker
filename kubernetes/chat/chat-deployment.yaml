@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-deployment
+  namespace: default
+  labels:
+    app: chat
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: chat
+  template:
+    metadata:
+      labels:
+        app: chat
+    spec:
+      containers:
+      - name: chat
+        image: s3249212/chat:latest
+        ports:
+          - containerPort: 4001

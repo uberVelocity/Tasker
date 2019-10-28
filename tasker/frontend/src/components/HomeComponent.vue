@@ -58,12 +58,12 @@ export default {
       }
     },
     goUser() {
-      if (!localStorage.getItem('authorization')) {
+      /*if (!localStorage.getItem('authorization')) {
         this.$router.push('/login');
       }
-      else {
+      else {*/
         this.$router.push('/user');
-      }
+      //}
     },
     async login() {
       const res = await AuthenticationService.login({
