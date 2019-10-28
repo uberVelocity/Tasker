@@ -12,7 +12,6 @@ app.use(express.json());
 
 const port = process.env.PORT || 4001;
 
-const users = [];
 const connections = [];
 
 io.sockets.on('connection', (socket) => {
