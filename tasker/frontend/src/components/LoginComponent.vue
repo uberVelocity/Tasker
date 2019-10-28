@@ -14,7 +14,7 @@
       type="waves-effect waves-default btn"
     >Login</button>
     <br />
-    <label v-if="response">Response: {{response}}</label>
+    <label class="response" v-if="response">{{response}}</label>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
     return {
       email: "",
       password: "",
-      response: "Unchanged response"
+      response: ""
     };
   },
   methods: {
@@ -36,18 +36,19 @@ export default {
         email: this.email,
         password: this.password
       });
+
       // Check for authorization header existance
       // Save the token in local storage and redirect
       console.log('setting authorization header');
       const token = res.data.authorization;
       if (token) {
         localStorage.setItem("authorization", token);
+        this.$router.push("/servers");
       }
       else {
-        this.response = 'Failed to login!'; 
+        this.response = res.data.err; 
       }
-      this.$router.push("/servers");
-      },
+    },
     goServers() {
       this.$router.push("/servers");
     },
@@ -111,6 +112,10 @@ input {
   border-bottom: 1px solid #6c63ff !important;
   -webkit-box-shadow: 0 1px 0 0 #6c63ff !important;
   box-shadow: 0 1px 0 0 #6c63ff !important;
+}
+
+.response {
+  color:#ff5b5f;
 }
 
 .btn:focus {

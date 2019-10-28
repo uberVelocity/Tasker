@@ -10,7 +10,7 @@
         <br>
         <button class="waves-effect waves-default btn" @click="register">Register</button>
         <br>
-        <label> Response: {{ response }} </label>
+        <label>{{ response }} </label>
     </div>
 </template>
 
@@ -28,16 +28,16 @@ export default {
     },
     methods: {
         async register() {
-            const response = await AuthenticationService.register({
+            const res = await AuthenticationService.register({
                 name: this.name,
                 email: this.email,
                 password: this.password
             });
-            if (response.data.user) {
+            if (res.data.user) {
               this.$router.push('/login');
             }
             else {
-              this.response = 'invalid fields';
+              this.response = res.data.err;
             }
         }
     }
@@ -98,6 +98,10 @@ input {
   border-bottom: 1px solid #6C63FF !important;
   -webkit-box-shadow: 0 1px 0 0 #6C63FF !important;
   box-shadow: 0 1px 0 0 #6C63FF !important;
+}
+
+label {
+  color:#ff5b5f;
 }
 
 .btn:focus {
