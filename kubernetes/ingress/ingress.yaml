@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: www.minikube.info
+  - host: minikube.info
     http:
       paths:
       - path: /api
