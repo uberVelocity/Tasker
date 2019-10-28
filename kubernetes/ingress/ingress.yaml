@@ -18,3 +18,16 @@ spec:
           # matches with Service metadata.name
           serviceName: front-end-service
           servicePort: 80
+  - host: www.minikube.info
+    http:
+      paths:
+      - path: /api
+        backend:
+          # matches with Service metadata.name
+          serviceName: back-end-service
+          servicePort: 5000
+      - path: /
+        backend:
+          # matches with Service metadata.name
+          serviceName: front-end-service
+          servicePort: 80          
