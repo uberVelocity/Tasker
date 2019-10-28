@@ -41,11 +41,15 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: mongo
-          image: mongo
+          image: mongo:4.0
           command:
             - mongod
             - "--replSet"
             - rs0
+            - "--bind_ip"
+            - "localhost"
+            - "--noprealloc"
+            - "--smallfiles"
           ports:
             - containerPort: 27017
           volumeMounts:
