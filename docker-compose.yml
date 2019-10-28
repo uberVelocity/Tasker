@@ -22,6 +22,7 @@ services:
   mongo-node:
     container_name: mongo-node
     image: mongo:4.0.4
+    restart: always
     ports:
       - '27017:27017'
     networks:
