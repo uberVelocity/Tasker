@@ -75,7 +75,6 @@ export default {
         // Save the token in local storage and redirect
         localStorage.setItem("authorization", res.headers["authorization"]);
         this.$router.push("/servers");
-        this.response = "if you see this you're in deep shit";
       }
     },
     goLogin() {
@@ -85,7 +84,7 @@ export default {
       this.$router.push("/register");
     },
     goTesting() {
-      this.$router.push("/testing");
+      this.$router.push("/testing");``
     }
   }
 };
