@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/1/./kompose-linux-amd64 convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: packager
+  name: packager
+spec:
+  ports:
+  - name: "4004"
+    port: 4004
+    targetPort: 4004
+  selector:
+    io.kompose.service: packager
+status:
+  loadBalancer: {}
