@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://www.minikube.info/api/servers/';
+const url = 'http://minikube.info/api/servers/';
 
 class ServerService {
     // Get Servers

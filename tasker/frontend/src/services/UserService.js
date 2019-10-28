@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://www.minikube.info/api/info/';
+const url = 'http://minikube.info/api/info/';
 
 class UserService {
     

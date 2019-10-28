@@ -1,7 +1,7 @@
 import axios from 'axios';
 import DebuggerService from '../services/DebuggerService';
 
-const url = 'http://www.minikube.info/api/user/';
+const url = 'http://minikube.info/api/user/';
 
 class AuthenticationService {
     static async register(credentials) {
