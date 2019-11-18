@@ -76,5 +76,5 @@ Secondly, database replication was attempted both in MongoDB and CassandraDB. Re
 
 Thirdly, should a service stop operating for any reason, the rest of the platform would continue to work as intended (minus the functionality provided by the stopped service). If that service would be started again, the functionality would be regained. For a service that is dependent on the existence of a functional database, the service would regain functionality. This is ensured by attempting to reconnect to the database, should the service notice that it is down.
 
-System architecture
+### System architecture
 Every component runs in a docker container. On top of that, every container is orchestrated by Kubernetes which, in our testing, created 3 replicas per service. This number can be modified. Within Kubernetes lies a load balancer named ingress which directs traffic to appropriate services.  
