@@ -78,3 +78,5 @@ Thirdly, should a service stop operating for any reason, the rest of the platfor
 
 ### System architecture
 Every component runs in a docker container. On top of that, every container is orchestrated by Kubernetes which, in our testing, created 3 replicas per service. This number can be modified. Within Kubernetes lies a load balancer named ingress which directs traffic to appropriate services.  
+
+![](systemArchitecture.png)
