@@ -26,12 +26,15 @@ const about = require('./routes/api/about');
 const debug = require('./routes/api/debugger');
 const info = require('./routes/api/info');
 
+// Define routes
 app.use('/servers', servers);
 app.use('/user', auth);
 app.use('/about', about);
 app.use('/debugger', debug);
 app.use('/info', info);
 
+// Allow server to default to environment port or 5000 in case env absent
 const port = process.env.PORT || 5000;
 
+// Start server
 app.listen(port, () => console.log(`Server started on port ${port}`));
