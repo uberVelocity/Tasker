@@ -2,9 +2,25 @@
 
 A computation management PaaS that optimizes tasks allocation for resource optimization.
 
-## Full-stack of the application
+![Homepage](https://github.com/uberVelocity/Tasker/blob/master/screenshots/homepage.png)
 
+## Server page
+Users may insert new servers according to their location and energy specification. Servers are automatically inserted in databased and sensors are set up that record their CO2 emissions and GW consumptions.
+![Servers](https://github.com/uberVelocity/Tasker/blob/master/screenshots/servers.png)
+
+## Data visualization
+Real-time graphs can be visualized per server to establish their GW consumption / CO2 emissions.
+![realtime-graph](https://github.com/uberVelocity/Tasker/blob/master/screenshots/graph.png)
+
+The raw data can also be inspected in a status page.
+![status](https://github.com/uberVelocity/Tasker/blob/master/screenshots/status.png)
+
+## Full-stack of the application
 The full-stack of our application consists of the following technologies.
+
+## Real-time chat
+System engineers can be contacted for support by authorized users. Although the connection is unquestionably real-time and robust, their help is not.
+![chat](https://github.com/uberVelocity/Tasker/blob/master/screenshots/chat.png)
 
 ### Front-end
 
@@ -14,11 +30,7 @@ The front-end of the application was created using Vue.js, a progressive front-e
 
 NGINX was used in order to serve the static assets of the front-end. NGINX was chosen since it is a battle-tested solution that provides high performance in terms of number of requests.
 
-<<<<<<< HEAD
-### CSS-Framework: Materialize
-=======
 ### CSS-Framework
->>>>>>> b5f78c90627fdc8a6cd7453a34e3e148740715b3
 
 Google's materialize was chosen as the framework for the website as it is easy to use and adheres to good design practices that enforce concepts such as dynamic content and grids.
 
@@ -80,12 +92,7 @@ Secondly, database replication was attempted both in MongoDB and CassandraDB. Re
 
 Thirdly, should a service stop operating for any reason, the rest of the platform would continue to work as intended (minus the functionality provided by the stopped service). If that service would be started again, the functionality would be regained. For a service that is dependent on the existence of a functional database, the service would regain functionality. This is ensured by attempting to reconnect to the database, should the service notice that it is down.
 
-<<<<<<< HEAD
-\section{System architecture}
-Every component runs in a docker container. On top of that, every container is orchestrated by Kubernetes which, in our testing, created 3 replicas per service. This number can be modified. Within Kubernetes lies a load balancer named ingress which directs traffic to appropriate services.  
-=======
 ### System architecture
 Every component runs in a docker container. On top of that, every container is orchestrated by Kubernetes which, in our testing, created 3 replicas per service. This number can be modified. Within Kubernetes lies a load balancer named ingress which directs traffic to appropriate services.  
 
-![](systemArchitecture.png)
->>>>>>> b5f78c90627fdc8a6cd7453a34e3e148740715b3
+![system-architecture](systemArchitecture.png)
