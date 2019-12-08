@@ -10,18 +10,15 @@ dotenv.config();
 
 const port = process.env.PORT || 3001;
 
-// Inserts at every second the value of each server into the database
+// Generates Co2 values
 async function generateCo2() {
     
     const servers = await getServersListFromMongo();
-    // console.log(servers);
-    // For each server in the server list, generate a CO2 emission value and insert it
-    // in the database.
+    // For each server in the server list, generate a CO2 emission value
     if (servers.length > 0) {
         servers.forEach(server => {
             // Use server ID to INSERT value of CO2 and timestamp to corresponding servers
             const serverId = server._id.toString();
-            console.log(serverId);
             const co2Value = Math.random();
             params = [serverId, new Date(), co2Value];
             StreamService.streamData(params);
@@ -42,6 +39,7 @@ async function getServersListFromMongo() {
     return servers;
 }
 
+// 'Read' Co2 value every 4 seconds
 setInterval(generateCo2, 4000);
 
 app.listen(port, () => console.log(`Carbon dioxide sensor started on port ${port}`));

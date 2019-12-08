@@ -14,7 +14,11 @@ The front-end of the application was created using Vue.js, a progressive front-e
 
 NGINX was used in order to serve the static assets of the front-end. NGINX was chosen since it is a battle-tested solution that provides high performance in terms of number of requests.
 
+<<<<<<< HEAD
 ### CSS-Framework: Materialize
+=======
+### CSS-Framework
+>>>>>>> b5f78c90627fdc8a6cd7453a34e3e148740715b3
 
 Google's materialize was chosen as the framework for the website as it is easy to use and adheres to good design practices that enforce concepts such as dynamic content and grids.
 
@@ -76,5 +80,12 @@ Secondly, database replication was attempted both in MongoDB and CassandraDB. Re
 
 Thirdly, should a service stop operating for any reason, the rest of the platform would continue to work as intended (minus the functionality provided by the stopped service). If that service would be started again, the functionality would be regained. For a service that is dependent on the existence of a functional database, the service would regain functionality. This is ensured by attempting to reconnect to the database, should the service notice that it is down.
 
+<<<<<<< HEAD
 \section{System architecture}
 Every component runs in a docker container. On top of that, every container is orchestrated by Kubernetes which, in our testing, created 3 replicas per service. This number can be modified. Within Kubernetes lies a load balancer named ingress which directs traffic to appropriate services.  
+=======
+### System architecture
+Every component runs in a docker container. On top of that, every container is orchestrated by Kubernetes which, in our testing, created 3 replicas per service. This number can be modified. Within Kubernetes lies a load balancer named ingress which directs traffic to appropriate services.  
+
+![](systemArchitecture.png)
+>>>>>>> b5f78c90627fdc8a6cd7453a34e3e148740715b3
