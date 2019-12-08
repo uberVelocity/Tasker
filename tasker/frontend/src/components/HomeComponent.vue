@@ -4,7 +4,6 @@
       <button class="waves-effect waves-light btn" @click="goAbout">About</button>
       <button class="waves-effect waves-light btn" @click="goServers">Servers</button>
       <button class="waves-effect waves-light btn" @click="goUser">User dashboard</button>
-      <button class="waves-effect waves-light btn" @click="goTesting">Testing page</button>
         <ul class="right">
           <li>
             <input type="text" placeholder="Username" required v-model="email"/>
@@ -41,8 +40,7 @@ export default {
   data() {
     return {
       email: '',
-      password: '',
-      debugNumber: 0
+      password: ''    
     }
   },
   methods: {
@@ -58,12 +56,12 @@ export default {
       }
     },
     goUser() {
-      /*if (!localStorage.getItem('authorization')) {
+      if (!localStorage.getItem('authorization')) {
         this.$router.push('/login');
       }
-      else {*/
+      else {
         this.$router.push('/user');
-      //}
+      }
     },
     async login() {
       const res = await AuthenticationService.login({
@@ -82,9 +80,6 @@ export default {
     },
     goRegister() {
       this.$router.push("/register");
-    },
-    goTesting() {
-      this.$router.push("/testing");``
     }
   }
 };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "http://minikube.info:4002/api/history/";
+const url = "http://localhost:4002/api/history/";
 
 class HistoryService {
 

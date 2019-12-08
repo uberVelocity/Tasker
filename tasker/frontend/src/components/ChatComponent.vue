@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       isConnected: "false",
-      socket: io("minikube.info/api/chat"),
+      socket: io("localhost:4001"),
       message: "",
       chatText: ""
     };

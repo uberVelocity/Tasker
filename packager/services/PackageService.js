@@ -39,9 +39,7 @@ module.exports = class PackageService {
         channel.consume(queue, function(msg) {
           const data = JSON.parse(msg.content);
           const serverId = data[0].toString();
-          
-          // console.log(`data: ${data}`);
-          // console.log(`$data[0]: ${data[0]}`);
+
           const params = [serverId, data[1], data[2]];
           PackageService.insertData(insertGwConsumption, params);        
         }, {
@@ -74,8 +72,6 @@ module.exports = class PackageService {
           const data = JSON.parse(msg.content);
           const serverId = data[0].toString();
           
-          // console.log(`data: ${data}`);
-          // console.log(`$data[0]: ${data[0]}`);
           const params = [serverId, data[1], data[2]];
           PackageService.insertData(insertCo2Consumption, params);
         }, {

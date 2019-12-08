@@ -29,21 +29,13 @@ const getAllCo2Emissions = 'SELECT value, ts FROM co2consumptioncompaction WHERE
 
 // Get history of GW
 router.post('/gw', async (req, res) => {
-    console.log('hit GW');
-    const serverId = req.body.serverId;
-    console.log(`serverId body from function gw: ${serverId}`);
     const gwHistory = await compileServerListWithHistory('power', req.body.serverId);
-    console.log(`gw: ${gwHistory}`);
     res.status(200).send(gwHistory);
 });
 
 // Get history of CO2 emissions
 router.post('/co2', async (req, res) => {
-    console.log('hit co2');
-    const serverId = req.body.serverId;
-    console.log(`serverId body from function co2: ${serverId}`);
     const co2History = await compileServerListWithHistory('co2', req.body.serverId);
-    console.log(`co2: ${co2History}`);
     res.status(200).send(co2History);
 });
 
@@ -90,7 +82,6 @@ async function compileServerListWithHistory(requestType, serverId) {
         response => {},
         reason => {}
     );
-    console.log(`data: ${data}`);
 
     return data;
 }
