@@ -15,12 +15,12 @@ Real-time graphs can be visualized per server to establish their GW consumption 
 The raw data can also be inspected in a status page.
 ![status](https://github.com/uberVelocity/Tasker/blob/master/screenshots/status.png)
 
-## Full-stack of the application
-The full-stack of our application consists of the following technologies.
-
 ## Real-time chat
 System engineers can be contacted for support by authorized users. Although the connection is unquestionably real-time and robust, their help is not.
 ![chat](https://github.com/uberVelocity/Tasker/blob/master/screenshots/chat.png)
+
+## Full-stack of the application
+The full-stack of our application consists of the following technologies.
 
 ### Front-end
 
