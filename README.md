@@ -1,6 +1,6 @@
 # Tasker
 
-A computation management PaaS that optimizes tasks allocation for resource optimization.
+A computation management PaaS that optimizes task allocation for resource optimization.
 
 ![Homepage](https://github.com/uberVelocity/Tasker/blob/master/screenshots/homepage.png)
 
